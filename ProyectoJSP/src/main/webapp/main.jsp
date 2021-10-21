@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>Principal</title>
+<title>PrincipalPagina</title>
 </head>
 
 <body>
