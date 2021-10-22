@@ -1,0 +1,46 @@
+form{
+    font-family: Arial;
+    text-align: center;
+    font-family: Arial;
+    padding: 25px;
+    max-width: 300px;
+    max-height: 420px;
+    background-color: #E7E7E7;
+    margin: 0 auto;
+}
+
+form #nombreAlumno{
+  width: 100%;
+}
+
+form input, form textarea{
+  margin-bottom: 15px;
+  width: 22%;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
+  border: none; 
+  color: #525c66; 
+  font-size: 1em;
+}
+
+
+button {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+	background-color: #2e2e2e;
+	padding: 10px 45px 10px 45px;
+	border: 0;
+	font-size: 1em; 
+	color: 	white;
+}
+
+p{
+    font-family: Arial;
+    text-align: center;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 17px;
+}
