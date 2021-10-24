@@ -1,4 +1,6 @@
-form{
+
+#datosAlumno{
+	
     font-family: Arial;
     text-align: center;
     font-family: Arial;
@@ -9,13 +11,10 @@ form{
     margin: 0 auto;
 }
 
-form #nombreAlumno{
-  width: 100%;
-}
-
-form input, form textarea{
+#datosAlumno input, #datosAlumno textarea{
+	
   margin-bottom: 15px;
-  width: 22%;
+  width: 100%;
   padding: 10px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box; 
@@ -25,7 +24,7 @@ form input, form textarea{
 }
 
 
-button {
+#EnviarDatos {
     display:block;
     margin-left: auto;
     margin-right: auto;
@@ -36,11 +35,62 @@ button {
 	color: 	white;
 }
 
-p{
+#datosAlumno p{
     font-family: Arial;
     text-align: center;
     display:block;
     margin-left: auto;
     margin-right: auto;
     font-size: 17px;
+}
+
+button {
+    display:left;
+	background-color: #2e2e2e;
+	padding: 10px 45px 10px 45px;
+	border: 0;
+	font-size: 1em; 
+	color: 	white;
+}
+p{
+    font-family: Arial;
+    text-align: left;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 17px;
+}
+div{
+    background-color: #E7E7E7;
+}
+div p {
+	
+	margin-top:15px;
+	padding-top:15px;
+	padding-left:15px;
+	
+}
+div button{
+	
+	margin-left:15px;
+}
+.hora {
+	
+	margin-bottom:15px;
+	padding-bottom:15px;
+	padding-right:15px;
+      text-align:right;
+  vertical-align: middle;
+      
+}
+
+h2{
+	text-align:center;
+	font-family: Arial;
+	
+}
+#contador{
+		margin-top:13%;
+      text-align:left;
+       vertical-align: text-bottom;
 }
