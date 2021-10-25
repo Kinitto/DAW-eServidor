@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp"%>
 
-	
+
 <!DOCTYPE html>
 <head>
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 <title>Formulario</title>
 </head>
 <body>
@@ -24,8 +25,10 @@
 			<button type="submit" value="Enviar" id="EnviarDatos">Enviar</button>
 		</p>
 	</form>
-	
-	<p id="contador"><%! private int Contador = 0; %>
-        Número de accesos al formulario: <%= ++Contador %><p>
+
+	<p id="contador"><%!private int Contador = 0;%>
+		Número de accesos al formulario:
+		<%=++Contador%>
+	<p>
 </body>
 </html>
