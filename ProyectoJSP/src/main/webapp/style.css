@@ -1,90 +1,96 @@
-#datosAlumno {
-	font-family: Arial;
-	text-align: center;
-	font-family: Arial;
-	padding: 25px;
-	max-width: 300px;
-	max-height: 420px;
-	background-color: #E7E7E7;
-	margin: 0 auto;
+
+#datosAlumno{
+	
+    font-family: Arial;
+    text-align: center;
+    font-family: Arial;
+    padding: 25px;
+    max-width: 300px;
+    max-height: 420px;
+    background-color: #E7E7E7;
+    margin: 0 auto;
 }
 
-#datosAlumno input, #datosAlumno textarea {
-	margin-bottom: 15px;
-	width: 100%;
-	padding: 10px;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	border: none;
-	color: #525c66;
-	font-size: 1em;
+#datosAlumno input, #datosAlumno textarea{
+	
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
+  border: none; 
+  color: #525c66; 
+  font-size: 1em;
 }
+
 
 #EnviarDatos {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
 	background-color: #2e2e2e;
 	padding: 10px 45px 10px 45px;
 	border: 0;
-	font-size: 1em;
-	color: white;
+	font-size: 1em; 
+	color: 	white;
 }
 
-#datosAlumno p {
-	font-family: Arial;
-	text-align: center;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 17px;
+#datosAlumno p{
+    font-family: Arial;
+    text-align: center;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 17px;
 }
 
 button {
-	display: left;
+    display:left;
 	background-color: #2e2e2e;
 	padding: 10px 45px 10px 45px;
 	border: 0;
-	font-size: 1em;
-	color: white;
+	font-size: 1em; 
+	color: 	white;
 }
-
-p {
-	font-family: Arial;
-	text-align: left;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 17px;
+p{
+    font-family: Arial;
+    text-align: left;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 17px;
 }
-
-div {
-	background-color: #E7E7E7;
+div{
+    background-color: #E7E7E7;
 }
-
 div p {
-	margin-top: 15px;
-	padding-top: 15px;
-	padding-left: 15px;
+	
+	margin-top:15px;
+	padding-top:15px;
+	padding-left:15px;
+	
 }
-
-div button {
-	margin-left: 15px;
+div button{
+	
+	margin-left:15px;
 }
-
 .hora {
-	margin-bottom: 15px;
-	padding-bottom: 15px;
-	padding-right: 15px;
-	text-align: right;
-	vertical-align: middle;
+	
+	margin-bottom:15px;
+	padding-bottom:15px;
+	padding-right:15px;
+      text-align:right;
+  vertical-align: middle;
+      
 }
 
-h2 {
-	text-align: center;
+h2{
+	text-align:center;
 	font-family: Arial;
+	
 }
-
-#contador {
-	text-align: left;
+#contador{
+	
+      text-align:left;
+    
 }
