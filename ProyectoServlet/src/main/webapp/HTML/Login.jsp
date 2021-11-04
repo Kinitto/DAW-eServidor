@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="style.css">
 <body>
+	  <div class="login">
 	<form action="/ProyectoServlet/servletLogin" method="post">
+        <header>Inicio de sesion</header>
 		<p>
-			Usuario <input type="text" name="usuario">
+			 <input type="text" name="usuario" id="username" placeholder="Usuario">
 		</p>
 		<p>
-			Contraseña <input type="password" name="passwd">
+			 <input type="password" name="passwd" placeholder="Contraseña">
 		</p>
 		<input type="submit" value="Login" />
 	</form>
+</div>
 	<%
 			if (session.getAttribute("errorLogin") == "true" ){
 			%>
