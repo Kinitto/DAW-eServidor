@@ -1,6 +1,8 @@
 package dwes;
 
 import java.io.*;
+import java.util.HashMap;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -13,6 +15,15 @@ public class ServletForm extends HttpServlet
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
                    throws ServletException, IOException {
+    	
+    	 HashMap<String, String> userPass = new HashMap<String, String>();
+
+ 	    // Add keys and values (Country, City)
+ 	    userPass.put("Admin", "1234");
+ 	    userPass.put("Joaquin", "claveJoaquin");
+ 	    
+ 	    System.out.println(userPass.get("Admin"));
+    	
         response.setContentType("text/html");
  
         PrintWriter out = response.getWriter();
