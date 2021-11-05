@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html>
-<body>
+<link rel="stylesheet" href="style.css">
 
-	<form action="/ProyectoServlet/servletCatalogo" method="post">
-		<p>[imagen camiseta ]Cantidad:<input type="number" name="cantidad"> </p>
-	<p>	[imagen pantalon ]Pantalon:<input type="number" name="cantidadp2"> </p>
-		<p>[imagen Abrigo ]Abrigo:<input type="number" name="cantidadp3"> </p> 
-		
-		<input type="submit" value="Comprar">
+<body>
+<form action="/ProyectoServlet/servletCatalogo" method="post">
+	<div class="section">
+		<div class="cards">
+			<div class="new-producto">
+				<h1>Hooders.</h1>
+			</div>
+			<div class="card">
+				<div class="image-section">
+					<img src="camiseta.jpg">
+				</div>
+				<div class="description">
+					<h1>Camiseta</h1>
+					<p><b>Precio-</b><span>15€</span></p>
+				</div>
+				<div class="button-group">
+					<input type="number" name="cantidad">
+				</div>
+			</div>
+			<div class="card">
+				<div class="image-section">
+					<img src="camiseta.jpg">
+				</div>
+				<div class="description">
+					<h1>Pantalon</h1>
+					<p><b>Precio</b><span>25€</span></p>
+				</div>
+				<div class="button-group">
+					<input type="number" name="cantidadp2">
+				</div>
+			</div>
+			<div class="card">
+				<div class="image-section">
+					<img src="camiseta.jpg">
+				</div>
+				<div class="description">
+					<h1>Abrigo</h1>
+					<p><b>Precio</b><span>65€</span></p>
+				</div>
+				<div class="button-group">
+					<input type="number" name="cantidadp3">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<input type="submit" value="Comprar">
 	</form>
 
 </body>
-</html>
 
+</html>
