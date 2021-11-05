@@ -38,6 +38,7 @@ public class Login extends HttpServlet {
 				|| usuario.equals(userPass.get("user2")) && clave.equals(userPass.get("claveuser2"))) {
 
 			System.out.println("usuario correcto");
+			sesion.setAttribute("usuario", request.getParameter("usuario"));
 			response.sendRedirect("/ProyectoServlet/HTML/Catalogo.html");
 			
 		}
