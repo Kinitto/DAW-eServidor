@@ -3,12 +3,15 @@ package dwes;
 public class Producto {
 
 	private String producto;
-	private int cantidad;
+	private String cantidad;
 	private int precio;
 
 
 
-	public Producto(String producto2, int cantidad2, int precio2) {
+	public Producto(String producto2, String cantidad2, int precio2) {
+		this.producto=producto2;
+		this.cantidad=cantidad2;
+		this.precio = precio2;
 		
 	}
 
@@ -21,11 +24,11 @@ public class Producto {
 		this.producto = producto;
 	}
 
-	public int getCantidad() {
+	public String getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
+	public void setCantidad(String cantidad) {
 		this.cantidad = cantidad;
 	}
 

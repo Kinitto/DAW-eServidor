@@ -25,18 +25,19 @@ public class verCarrito extends HttpServlet {
 		List<Producto> listado = (List<Producto>) sesion.getAttribute("carrito");
 		out.println("Sr./a " + sesion.getAttribute("usuario"));
 		if (listado == null) {
-			out.println("<br/>Usted no ha añadido ningun producto!!!");
+			out.println("<br/>Usted no ha aÃ±adido ningun producto!!!");
+
 		} else {
 
 			out.println("<br/><table border='1'>");
 			out.println("<tr><th>Producto</th><th>Cantidad</th><th>Precio</th></tr>");
 			for (int i = 0; i < listado.size(); i++) {
-				out.println("<td>" + listado.get(i).getProducto() + "</td>");
+				out.println("<tr><td>" + listado.get(i).getProducto() + "</td>");
 				out.println("<td>" + listado.get(i).getCantidad() + "</td>");
-				out.println("<td>" + listado.get(i).getPrecio() + "</td>");
-
+				out.println("<td>" + listado.get(i).getPrecio() + "</td></tr>");
+				System.out.println(listado.size());
 			}
-
+			
 		}
 
 	}

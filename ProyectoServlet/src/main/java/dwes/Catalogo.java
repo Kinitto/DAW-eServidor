@@ -17,27 +17,41 @@ public class Catalogo extends HttpServlet {
 	// Metodo para GET
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession sesion = request.getSession();
 
 		List<Producto> listado;
-		listado = new ArrayList<>();
-		
-		String producto = request.getParameter("producto");
-		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-		int precio = Integer.parseInt(request.getParameter("precio"));
-
-		Producto p = new Producto(producto,cantidad,precio);
-
-		listado.add(p);
+		HttpSession sesion = request.getSession();
 
 		// recuperar carrito si existe y si no lo creamos y lo guardamos en la sesion
 		if (sesion.getAttribute("carrito") != null) {
 			listado = (List<Producto>) sesion.getAttribute("carrito");
 		} else {
-
+			listado = new ArrayList<>();
 			sesion.setAttribute("carrito", listado);
 
 		}
+
+		String producto = "Camiseta";
+		String cantidad = request.getParameter("cantidad");
+		int precio = 15;
+		
+		String producto2 = "Pantalon";
+		String cantidad2 = request.getParameter("cantidadp2");
+		int precio2 = 25;
+		
+		String producto3 = "Abrigo";
+		String cantidad3 = request.getParameter("cantidadp3");
+		int precio3 = 65;
+		
+		
+		Producto p = new Producto(producto, cantidad, precio);
+		Producto p2 = new Producto(producto2, cantidad2, precio2);
+		Producto p3 = new Producto(producto3, cantidad3, precio3);
+
+		listado.add(p);
+		listado.add(p2);
+		listado.add(p3);
+
+
 
 		response.sendRedirect("/ProyectoServlet/servletCarrito");
 

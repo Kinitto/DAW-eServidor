@@ -17,8 +17,8 @@ public class Login extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//creamos hashMap para guardar los usuarios
-		
+		// creamos hashMap para guardar los usuarios
+
 		HashMap<String, String> userPass = new HashMap<String, String>();
 
 		// añadimos clave valor
@@ -29,20 +29,19 @@ public class Login extends HttpServlet {
 
 		String usuario = request.getParameter("usuario");
 		String clave = request.getParameter("passwd");
-		//creamo una sesion
+		// creamo una sesion
 		HttpSession sesion = request.getSession();
-		
-		//si el usuario y clave coincide con user 1 o user 2
-		
+
+		// si el usuario y clave coincide con user 1 o user 2
+
 		if (usuario.equals(userPass.get("user1")) && clave.equals(userPass.get("claveuser1"))
 				|| usuario.equals(userPass.get("user2")) && clave.equals(userPass.get("claveuser2"))) {
 
 			System.out.println("usuario correcto");
 			sesion.setAttribute("usuario", request.getParameter("usuario"));
 			response.sendRedirect("/ProyectoServlet/HTML/Catalogo.html");
-			
-		}
-		else {
+
+		} else {
 			System.out.println("login error");
 			sesion.setAttribute("errorLogin", "true");
 			response.sendRedirect("/ProyectoServlet/HTML/Login.jsp");
