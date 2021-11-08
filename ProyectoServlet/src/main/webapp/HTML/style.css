@@ -167,3 +167,36 @@
 	font-weight: bold;
 	color: red;
 }
+
+
+
+.titulo{
+  font-family:segoe UI;
+  font-size:22px;
+  color:rgb(0, 0, 0);
+  font-weight:bold;
+}
+
+th
+{
+  text-align:center;
+  background-color:#ccc;
+  border:1px solid gray;
+  padding:5px
+}
+td{
+  padding:5px;
+  border:1px solid gray;
+}
+
+table{
+    border-collapse:collapse;
+}
+
+#BtnCalcular{
+  font-family:segoe UI;
+  font-size:12pt;
+  color:black;
+  font-weight:bold;
+  padding:5px;
+}

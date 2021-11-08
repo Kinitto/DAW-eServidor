@@ -24,19 +24,18 @@ public class verCarrito extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		List<Producto> listado = (List<Producto>) sesion.getAttribute("carrito");
 
-		if (sesion.getAttribute("usuario") == null) {
-			out.println("<br/>No puede llegar hasta aqui sin iciar sesion.");
-			out.println("<a href=\"/ProyectoServlet/HTML/Login.jsp\">Iniciar Sesiï¿½n</a>");
-
+		if (sesion.isNew() || sesion.getAttribute("usuario") == null) {
+			response.sendRedirect("/ProyectoServlet/HTML/Login.jsp");
 		}
 
 		else {
 
-			out.println("Sr./a " + sesion.getAttribute("usuario") + ". Este es el resumen de su pedido");
+			out.println("<p>Sr./a " + sesion.getAttribute("usuario") + ". Este es el resumen de su pedido</p>");
+			out.println("<br/>Si deséa modificar su pedido o no ha seleccionado ningún producto, puedes.");
+			out.println("<a href=\"servletCatalogo\">Volver a la tienda</a></br>");
+
 			out.println("<br/><table border='1' id='tablaCarrito'>");
 			out.println("<tr><th>Producto</th><th>Cantidad</th><th>Precio</th></tr>");
-			out.println("<br/>Si desea aÃ±adir mas productos o no seleccionaste ninguno, puedes.");
-			out.println("<a href=\"servletCatalogo\">Volver a la tienda</a>");
 
 			String producto = "Camiseta";
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
@@ -58,29 +57,58 @@ public class verCarrito extends HttpServlet {
 			listado.add(p2);
 			listado.add(p3);
 
-			for (int i = 0; i < listado.size(); i++) {
+			if (cantidad > 0) {
+				out.println("<tr><td>" + producto + "</td>");
+				out.println("<td>" + cantidad + "</td>");
+				out.println("<td>" + precio + "$</td></tr>");
 
-				if (listado.get(i).getCantidad() != 0) {
-					out.println("<tr><td>" + listado.get(i).getProducto() + "</td>");
-					out.println("<td>" + listado.get(i).getCantidad() + "</td>");
-					out.println("<td>" + listado.get(i).getPrecio() + "</td></tr>");
-					
-					
-				}
-				
+				sesion.setAttribute("producto", producto);
+				sesion.setAttribute("cantidad", cantidad);
+				sesion.setAttribute("precio", precio);
+				double total1 = precio * cantidad;
+				sesion.setAttribute("total1", total1);
 			}
-			
 
-			out.println("<form action=\"/ProyectoServlet/servletrespuesta\"> ");
+			if (cantidad2 > 0) {
+				out.println("<tr><td>" + producto2 + "</td>");
+				out.println("<td>" + cantidad2 + "</td>");
+				out.println("<td>" + precio2 + "$</td></tr>");
+				sesion.setAttribute("producto2", producto2);
+				sesion.setAttribute("cantidad2", cantidad2);
+				sesion.setAttribute("precio2", precio2);
+				double total2 = precio2 * cantidad2;
+				sesion.setAttribute("total2", total2);
+
+			}
+
+			if (cantidad3 > 0) {
+				out.println("<tr><td>" + producto3 + "</td>");
+				out.println("<td>" + cantidad3 + "</td>");
+				out.println("<td>" + precio3 + "$</td></tr>");
+				sesion.setAttribute("producto3", producto3);
+				sesion.setAttribute("cantidad3", cantidad3);
+				sesion.setAttribute("precio3", precio3);
+				double total3 = precio3 * cantidad3;
+				sesion.setAttribute("total3", total3);
+			}
+
+			out.println(" </table> ");
+			double total = (precio * cantidad) + (precio2 * cantidad2) + (precio3 * cantidad3);
+			sesion.setAttribute("total", total);
+			if (total > 0) {
+				out.println("</br>Total sin IVA: " + total + "$");
+			}
+
+			out.println("<form action=\"/ProyectoServlet/servletFactura\"> ");
 
 			out.println(" <table border=\"0\"> ");
 			out.println("<header><br/>Elige una opcion de envio.</header>");
 			out.println(
-					" <br/><tr><td><input type=\"radio\" name=\"accion\" value=\"primo\" selected>Envio a su domicilio.</td></tr> ");
+					" <br/><tr><td><input type=\"radio\" name=\"accion\" value=\"domicilio\" checked>Envio a su domicilio. (2,50$)</td></tr> ");
 			out.println(
-					" <tr><td><input type=\"radio\" name=\"accion\" value=\"redirect\">Envio a su oficina de correos mas cercana.</td></tr> ");
+					" <tr><td><input type=\"radio\" name=\"accion\" value=\"correo\">Envio a su oficina de correos mas cercana. (1,25$)</td></tr> ");
 			out.println(
-					" <tr><td><input type=\"radio\" name=\"accion\" value=\"error\">Recogida en una de nuestras tiendas.</td></tr> ");
+					" <tr><td><input type=\"radio\" name=\"accion\" value=\"tienda\">Recogida en una de nuestras tiendas. (Gratuito)</td></tr> ");
 			out.println(" </table> ");
 			out.println(" <input type=\"submit\" value=\"Enviar Datos\"> ");
 			out.println(" </form> ");
