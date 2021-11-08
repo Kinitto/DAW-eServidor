@@ -4,7 +4,7 @@
 <body>
 	<div class="login">
 		<form action="/ProyectoServlet/servletLogin" method="post">
-			<header>Inicio de sesion</header>
+			<header class="errorLogin">Inicio de sesion</header>
 			<p>
 				<input type="text" name="usuario" id="username"
 					placeholder="Usuario">

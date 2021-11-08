@@ -30,19 +30,20 @@ public class Catalogo extends HttpServlet {
 
 		}
 
+		// declaramos los nombres de cada producto, precio y su request
+
 		String producto = "Camiseta";
-		String cantidad = request.getParameter("cantidad");
+		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 		int precio = 15;
-		
+
 		String producto2 = "Pantalon";
-		String cantidad2 = request.getParameter("cantidadp2");
+		int cantidad2 = Integer.parseInt(request.getParameter("cantidadp2"));
 		int precio2 = 25;
-		
+
 		String producto3 = "Abrigo";
-		String cantidad3 = request.getParameter("cantidadp3");
+		int cantidad3 = Integer.parseInt(request.getParameter("cantidadp3"));
 		int precio3 = 65;
-		
-		
+
 		Producto p = new Producto(producto, cantidad, precio);
 		Producto p2 = new Producto(producto2, cantidad2, precio2);
 		Producto p3 = new Producto(producto3, cantidad3, precio3);
@@ -50,8 +51,6 @@ public class Catalogo extends HttpServlet {
 		listado.add(p);
 		listado.add(p2);
 		listado.add(p3);
-
-
 
 		response.sendRedirect("/ProyectoServlet/servletCarrito");
 

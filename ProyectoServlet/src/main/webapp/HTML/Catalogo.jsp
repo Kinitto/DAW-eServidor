@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="style.css">
-
 <body>
 <form action="/ProyectoServlet/servletCatalogo" method="post">
 	<div class="section">
@@ -18,7 +17,7 @@
 					<p><b>Precio-</b><span>15€</span></p>
 				</div>
 				<div class="button-group">
-					<input type="number" name="cantidad">
+					Cantidad: <input type="number" name="cantidad" class="cantidad" value="0">
 				</div>
 			</div>
 			<div class="card">
@@ -30,7 +29,7 @@
 					<p><b>Precio</b><span>25€</span></p>
 				</div>
 				<div class="button-group">
-					<input type="number" name="cantidadp2">
+					Cantidad: <input type="number" name="cantidadp2" class="cantidad" value="0">
 				</div>
 			</div>
 			<div class="card">
@@ -42,13 +41,17 @@
 					<p><b>Precio</b><span>65€</span></p>
 				</div>
 				<div class="button-group">
-					<input type="number" name="cantidadp3">
+					Cantidad: <input type="number" name="cantidadp3" class="cantidad" value="0">
 				</div>
 			</div>
+			
 		</div>
+		
+		
+		<input type="submit" value="Ver pedido" class="boton">
+		
 	</div>
 	
-	<input type="submit" value="Comprar">
 	</form>
 
 </body>
