@@ -1,6 +1,7 @@
 package dwes;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,9 +18,14 @@ public class Catalogo extends HttpServlet {
 	// Metodo para GET
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
 		List<Producto> listado;
 		HttpSession sesion = request.getSession();
+		
+		if(sesion.isNew() || sesion.getAttribute("usuario") == null) {
+			response.sendRedirect("/ProyectoServlet/HTML/Login.jsp");
+		}
 
 		// recuperar carrito si existe y si no lo creamos y lo guardamos en la sesion
 		if (sesion.getAttribute("carrito") != null) {
@@ -29,30 +35,70 @@ public class Catalogo extends HttpServlet {
 			sesion.setAttribute("carrito", listado);
 
 		}
+		
+		out.println("<!DOCTYPE html><html>"
+				+ "<link rel=\"stylesheet\" href=\"/ProyectoServlet/HTML/style.css\">\n"
+				+ "<body>\n"
+				+ "<form action=\"/ProyectoServlet/servletCarrito\" method=\"post\">\n"
+				+ "	<div class=\"section\">\n"
+				+ "		<div class=\"cards\">\n"
+				+ "			<div class=\"new-producto\">\n"
+				+ "				<h1>Hooders.</h1>\n"
+				+ "			</div>\n"
+				+ "			<div class=\"card\">\n"
+				+ "				<div class=\"image-section\">\n"
+				+ "					<img src=\"/ProyectoServlet/HTML/camiseta.jpg\">\n"
+				+ "				</div>\n"
+				+ "				<div class=\"description\">\n"
+				+ "					<h1>Camiseta</h1>\n"
+				+ "					<p><b>Precio-</b><span>15$</span></p>\n"
+				+ "				</div>\n"
+				+ "				<div class=\"button-group\">\n"
+				+ "					Cantidad: <input type=\"number\" name=\"cantidad\" class=\"cantidad\" value=\"0\">\n"
+				+ "				</div>\n"
+				+ "			</div>\n"
+				+ "			<div class=\"card\">\n"
+				+ "				<div class=\"image-section\">\n"
+				+ "					<img src=\"/ProyectoServlet/HTML/pantalon.jpg\">\n"
+				+ "				</div>\n"
+				+ "				<div class=\"description\">\n"
+				+ "					<h1>Pantalon</h1>\n"
+				+ "					<p><b>Precio</b><span>25$</span></p>\n"
+				+ "				</div>\n"
+				+ "				<div class=\"button-group\">\n"
+				+ "					Cantidad: <input type=\"number\" name=\"cantidadp2\" class=\"cantidad\" value=\"0\">\n"
+				+ "				</div>\n"
+				+ "			</div>\n"
+				+ "			<div class=\"card\">\n"
+				+ "				<div class=\"image-section\">\n"
+				+ "					<img src=\"/ProyectoServlet/HTML/abrigo.jpg\">\n"
+				+ "				</div>\n"
+				+ "				<div class=\"description\">\n"
+				+ "					<h1>Abrigo</h1>\n"
+				+ "					<p><b>Precio</b><span>65$</span></p>\n"
+				+ "				</div>\n"
+				+ "				<div class=\"button-group\">\n"
+				+ "					Cantidad: <input type=\"number\" name=\"cantidadp3\" class=\"cantidad\" value=\"0\">\n"
+				+ "				</div>\n"
+				+ "			</div>\n"
+				+ "			\n"
+				+ "		</div>\n"
+				+ "		\n"
+				+ "		\n"
+				+ "		<input type=\"submit\" value=\"Ver pedido\" class=\"boton\">\n"
+				+ "		\n"
+				+ "	</div>\n"
+				+ "	\n"
+				+ "	</form>\n"
+				+ "\n"
+				+ "</body></html>");
 
 		// declaramos los nombres de cada producto, precio y su request
 
-		String producto = "Camiseta";
-		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-		int precio = 15;
+		
+		
+		
 
-		String producto2 = "Pantalon";
-		int cantidad2 = Integer.parseInt(request.getParameter("cantidadp2"));
-		int precio2 = 25;
-
-		String producto3 = "Abrigo";
-		int cantidad3 = Integer.parseInt(request.getParameter("cantidadp3"));
-		int precio3 = 65;
-
-		Producto p = new Producto(producto, cantidad, precio);
-		Producto p2 = new Producto(producto2, cantidad2, precio2);
-		Producto p3 = new Producto(producto3, cantidad3, precio3);
-
-		listado.add(p);
-		listado.add(p2);
-		listado.add(p3);
-
-		response.sendRedirect("/ProyectoServlet/servletCarrito");
 
 	}
 

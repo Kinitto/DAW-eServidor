@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
 
 			System.out.println("usuario correcto");
 			sesion.setAttribute("usuario", request.getParameter("usuario"));
-			response.sendRedirect("/ProyectoServlet/HTML/Catalogo.jsp");
+			response.sendRedirect("/ProyectoServlet/servletCatalogo");
 
 		} else {
 			System.out.println("login error");

@@ -26,28 +26,53 @@ public class verCarrito extends HttpServlet {
 
 		if (sesion.getAttribute("usuario") == null) {
 			out.println("<br/>No puede llegar hasta aqui sin iciar sesion.");
-			out.println("<a href=\"/ProyectoServlet/HTML/Login.jsp\">Iniciar Sesión</a>");
+			out.println("<a href=\"/ProyectoServlet/HTML/Login.jsp\">Iniciar Sesiï¿½n</a>");
 
-		} else {
+		}
+
+		else {
+
 			out.println("Sr./a " + sesion.getAttribute("usuario") + ". Este es el resumen de su pedido");
 			out.println("<br/><table border='1' id='tablaCarrito'>");
 			out.println("<tr><th>Producto</th><th>Cantidad</th><th>Precio</th></tr>");
-			out.println("<br/>Si quieres añadir mas productos o no seleccionaste ninguno, puedes.");
-			out.println("<a href=\"/ProyectoServlet/HTML/Catalogo.jsp\">Volver a la tienda</a>");
+			out.println("<br/>Si desea aÃ±adir mas productos o no seleccionaste ninguno, puedes.");
+			out.println("<a href=\"servletCatalogo\">Volver a la tienda</a>");
+
+			String producto = "Camiseta";
+			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+			int precio = 15;
+
+			String producto2 = "Pantalon";
+			int cantidad2 = Integer.parseInt(request.getParameter("cantidadp2"));
+			int precio2 = 25;
+
+			String producto3 = "Abrigo";
+			int cantidad3 = Integer.parseInt(request.getParameter("cantidadp3"));
+			int precio3 = 65;
+
+			Producto p = new Producto(producto, cantidad, precio);
+			Producto p2 = new Producto(producto2, cantidad2, precio2);
+			Producto p3 = new Producto(producto3, cantidad3, precio3);
+
+			listado.add(p);
+			listado.add(p2);
+			listado.add(p3);
+
 			for (int i = 0; i < listado.size(); i++) {
 
 				if (listado.get(i).getCantidad() != 0) {
 					out.println("<tr><td>" + listado.get(i).getProducto() + "</td>");
 					out.println("<td>" + listado.get(i).getCantidad() + "</td>");
 					out.println("<td>" + listado.get(i).getPrecio() + "</td></tr>");
-
+					
+					
 				}
-
+				
 			}
 			
 
 			out.println("<form action=\"/ProyectoServlet/servletrespuesta\"> ");
-		
+
 			out.println(" <table border=\"0\"> ");
 			out.println("<header><br/>Elige una opcion de envio.</header>");
 			out.println(
