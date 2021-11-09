@@ -15,7 +15,13 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "cerrarSesion", urlPatterns = "/cerrarSesion")
 public class cerrarSesion extends HttpServlet {
 	// Metodo para GET
-
+	
+	/**
+	 * si la sesion es nueva te manda al login, si no, invalida la sesion y te manda al login.
+	 * 
+	 * @param response
+	 * @param request
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		HttpSession sesion = request.getSession();

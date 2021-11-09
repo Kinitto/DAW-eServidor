@@ -15,21 +15,34 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "verCarrito", urlPatterns = "/servletCarrito")
 public class verCarrito extends HttpServlet {
 	// Metodo para GET
+	
+	/**
+	 * recoge los datos de usuario y la lista por sesion y muestra informacion sobre el pedido
+	 * pinta una tabla con los datos seleccionados anteriormente y guarda los datos de los pedidos realizados en sesion.
+	 * por ultimo nos pinta un pequeÒo formulario para seleccionar la opcion de envio.
+	 * 
+	 * @param request
+	 * @param response
+	 */
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		out.println("<html><link rel='stylesheet' href='/ProyectoServlet/HTML/style.css'><body>");
+		
+		//recuperamos la lista de la sesion
 		HttpSession sesion = request.getSession();
 		List<Producto> listado = (List<Producto>) sesion.getAttribute("carrito");
 
+		//si no tiene sesion iniciada se le lleva al login
+		
 		if (sesion.isNew() || sesion.getAttribute("usuario") == null) {
 			response.sendRedirect("/ProyectoServlet/HTML/Login.jsp");
 		}
 
 		else {
-
+			//se pinta el html
 			out.println("<p id=\"welcome\">Sr./a " + sesion.getAttribute("usuario") + ". Este es el resumen de su pedido</p>");
 			out.println("<br/>Si des√©a modificar su pedido o no ha seleccionado ning√∫n producto, puedes.");
 			out.println("<a href=\"servletCatalogo\">Volver a la tienda</a></br>");
@@ -37,6 +50,9 @@ public class verCarrito extends HttpServlet {
 			out.println("<br/><table border='1' id='tablaCarrito'>");
 			out.println("<tr><th>Producto</th><th>Cantidad</th><th>Precio</th></tr>");
 
+			
+			//creamos los productos
+			
 			String producto = "Camiseta";
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 			int precio = 15;
@@ -52,11 +68,17 @@ public class verCarrito extends HttpServlet {
 			Producto p = new Producto(producto, cantidad, precio);
 			Producto p2 = new Producto(producto2, cantidad2, precio2);
 			Producto p3 = new Producto(producto3, cantidad3, precio3);
-
+			
+			//aÒadimos los productos a la lista
+			
 			listado.add(p);
 			listado.add(p2);
 			listado.add(p3);
 
+			
+			//si la cantidad que hemos elegido es mayor de 0, se pinta nuestro producto en la tabla.
+			//guardamos en sesion la informacion del producto.
+			
 			if (cantidad > 0) {
 				out.println("<tr><td>" + producto + "</td>");
 				out.println("<td>" + cantidad + "</td>");
@@ -93,6 +115,7 @@ public class verCarrito extends HttpServlet {
 			}
 
 			out.println(" </table> ");
+			//pintamos precio total
 			double total = (precio * cantidad) + (precio2 * cantidad2) + (precio3 * cantidad3);
 			sesion.setAttribute("total", total);
 			if (total > 0) {
@@ -100,7 +123,7 @@ public class verCarrito extends HttpServlet {
 			}
 
 			
-			
+			//form final con opciones de envio. cada una tiene un value de accion al hacer el submit
 			if (cantidad >0 || cantidad2 >0 || cantidad3 > 0) {
 				
 				out.println("<form action=\"/ProyectoServlet/servletFactura\"> ");

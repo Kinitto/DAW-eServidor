@@ -19,7 +19,8 @@ public class Catalogo extends HttpServlet {
 	/**
 	 * Comprueba que hay una sesion creada y crea el arraylist de objetos
 	 * muestra por pantalla el html del catalogo.
-	 * @param
+	 * @param request
+	 * @param response
 	 */
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

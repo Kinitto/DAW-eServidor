@@ -10,6 +10,14 @@ import javax.servlet.http.*;
 
 @WebServlet("/servletFactura")
 public class Factura extends HttpServlet {
+	
+	/**
+	 * dependiendo de la accion que hayamos seleccionado en verCarrito
+	 * nos pintará nuestra tabla con el correspondiente precio de envio.
+	 * 
+	 * @param response
+	 * @param request
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
@@ -22,12 +30,16 @@ public class Factura extends HttpServlet {
 		}
 
 		else {
+			
+			//recogemos el dato accion del form verCarrito y dependiendo de la eleccion le mostramos un html diferente.
+			
 			String accion = request.getParameter("accion");
 
 			if (accion.equals("domicilio")) {
 			
-				// Buscar el ultimo numero primo y enviarlo
-
+				//establecemos el precio del iva y del envio dependiendo el caso.
+				//pintamos el html.
+				
 				double iva = 0.21;
 				double envio = 2.50;
 				double total = (double) sesion.getAttribute("total");
@@ -50,7 +62,7 @@ public class Factura extends HttpServlet {
 						+ "    <th>Valor unitario</th>\r\n"
 						+ "    <th>Valor total</th>\r\n"
 						);
-			
+			//si el producto es distinto a null, lo pinta.
 				
 			if(sesion.getAttribute("producto") != null) {
 				
