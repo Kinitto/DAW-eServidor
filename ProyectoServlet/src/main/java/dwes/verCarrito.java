@@ -30,8 +30,8 @@ public class verCarrito extends HttpServlet {
 
 		else {
 
-			out.println("<p>Sr./a " + sesion.getAttribute("usuario") + ". Este es el resumen de su pedido</p>");
-			out.println("<br/>Si deséa modificar su pedido o no ha seleccionado ningún producto, puedes.");
+			out.println("<p id=\"welcome\">Sr./a " + sesion.getAttribute("usuario") + ". Este es el resumen de su pedido</p>");
+			out.println("<br/>Si desÃ©a modificar su pedido o no ha seleccionado ningÃºn producto, puedes.");
 			out.println("<a href=\"servletCatalogo\">Volver a la tienda</a></br>");
 
 			out.println("<br/><table border='1' id='tablaCarrito'>");
@@ -96,22 +96,28 @@ public class verCarrito extends HttpServlet {
 			double total = (precio * cantidad) + (precio2 * cantidad2) + (precio3 * cantidad3);
 			sesion.setAttribute("total", total);
 			if (total > 0) {
-				out.println("</br>Total sin IVA: " + total + "$");
+				out.println("</br>Total <b>sin IVA:</b> " + total + "$");
 			}
 
-			out.println("<form action=\"/ProyectoServlet/servletFactura\"> ");
+			
+			
+			if (cantidad >0 || cantidad2 >0 || cantidad3 > 0) {
+				
+				out.println("<form action=\"/ProyectoServlet/servletFactura\"> ");
+				out.println(" <table border=\"0\"> ");
+				out.println("<header><br/>Elige una opcion de envio.</header>");
+				out.println(
+						" <br/><tr><td><input type=\"radio\" name=\"accion\" value=\"domicilio\" checked>Envio a su domicilio. (2,50$)</td></tr> ");
+				out.println(
+						" <tr><td><input type=\"radio\" name=\"accion\" value=\"correo\">Envio a su oficina de correos mas cercana. (1,25$)</td></tr> ");
+				out.println(
+						" <tr><td><input type=\"radio\" name=\"accion\" value=\"tienda\">Recogida en una de nuestras tiendas. (Gratuito)</td></tr> ");
+				out.println(" </table> ");
+				out.println(" <input type=\"submit\" id=\"btnResumen\" value=\"Tramitar\"> ");
+				out.println(" </form> ");
+			}
 
-			out.println(" <table border=\"0\"> ");
-			out.println("<header><br/>Elige una opcion de envio.</header>");
-			out.println(
-					" <br/><tr><td><input type=\"radio\" name=\"accion\" value=\"domicilio\" checked>Envio a su domicilio. (2,50$)</td></tr> ");
-			out.println(
-					" <tr><td><input type=\"radio\" name=\"accion\" value=\"correo\">Envio a su oficina de correos mas cercana. (1,25$)</td></tr> ");
-			out.println(
-					" <tr><td><input type=\"radio\" name=\"accion\" value=\"tienda\">Recogida en una de nuestras tiendas. (Gratuito)</td></tr> ");
-			out.println(" </table> ");
-			out.println(" <input type=\"submit\" value=\"Enviar Datos\"> ");
-			out.println(" </form> ");
+			
 
 		}
 

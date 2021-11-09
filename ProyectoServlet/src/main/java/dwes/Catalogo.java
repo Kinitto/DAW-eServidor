@@ -16,6 +16,11 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "catalogo", urlPatterns = "/servletCatalogo")
 public class Catalogo extends HttpServlet {
 	// Metodo para GET
+	/**
+	 * Comprueba que hay una sesion creada y crea el arraylist de objetos
+	 * muestra por pantalla el html del catalogo.
+	 * @param
+	 */
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();

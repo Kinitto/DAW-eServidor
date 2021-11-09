@@ -1,7 +1,6 @@
 package dwes;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -15,6 +14,16 @@ import javax.servlet.http.HttpSession;
 public class Login extends HttpServlet {
 	// Metodo para GET
 
+	/**
+	 * Creamos un hashMap y guardamos dentro 2 usuarios y sus respectivas contraseñas
+	 * Comprobamos que el usuario y clave introducido coincide con uno de los que hemos puesto.
+	 * Si escorrecto te envia al catalogo y guardamos en sesion el usuario
+	 * y si es incorrecto te manda al login de nuevo con un error.
+	 * @param request
+	 * @param response
+	 */
+	
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// creamos hashMap para guardar los usuarios
@@ -37,12 +46,10 @@ public class Login extends HttpServlet {
 		if (usuario.equals(userPass.get("user1")) && clave.equals(userPass.get("claveuser1"))
 				|| usuario.equals(userPass.get("user2")) && clave.equals(userPass.get("claveuser2"))) {
 
-			System.out.println("usuario correcto");
 			sesion.setAttribute("usuario", request.getParameter("usuario"));
 			response.sendRedirect("/ProyectoServlet/servletCatalogo");
 
 		} else {
-			System.out.println("login error");
 			sesion.setAttribute("errorLogin", "true");
 			response.sendRedirect("/ProyectoServlet/HTML/Login.jsp");
 

@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 
 
 @WebServlet("/servletFactura")
-public class Factura extends HttpServlet implements Runnable {
+public class Factura extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
@@ -128,10 +128,14 @@ public class Factura extends HttpServlet implements Runnable {
 						+ "  </tr>\r\n"
 						+ "</table>\r\n"
 						+ "</br>\r\n"
+						+"<form action=\"/ProyectoServlet/cerrarSesion\"> "
+						+" <input type=\"submit\" id=\"BtnCalcular\" value=\"Comprar\"> "
+						+" </form> "
 						+ "<hr width=\"98%\"/>\r\n"
 						+ "</body></html>");
 
 			}
+			
 			
 			if (accion.equals("correo")) {
 				
@@ -237,10 +241,14 @@ public class Factura extends HttpServlet implements Runnable {
 						+ "  </tr>\r\n"
 						+ "</table>\r\n"
 						+ "</br>\r\n"
+						+"<form action=\"/ProyectoServlet/cerrarSesion\"> "
+						+" <input type=\"submit\" id=\"BtnCalcular\" value=\"Comprar\"> "
+						+" </form> "
 						+ "<hr width=\"98%\"/>\r\n"
 						+ "</body></html>");
 
 			}
+
 			
 				if (accion.equals("tienda")) {
 				
@@ -347,10 +355,14 @@ public class Factura extends HttpServlet implements Runnable {
 						+ "  </tr>\r\n"
 						+ "</table>\r\n"
 						+ "</br>\r\n"
+						+"<form action=\"/ProyectoServlet/cerrarSesion\"> "
+						+" <input type=\"submit\" id=\"BtnCalcular\" value=\"Comprar\"> "
+						+" </form> "
 						+ "<hr width=\"98%\"/>\r\n"
 						+ "</body></html>");
 
 			}
+
 				
 			
 			
@@ -365,10 +377,7 @@ public class Factura extends HttpServlet implements Runnable {
 	}
 
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
+	
+
 
 }

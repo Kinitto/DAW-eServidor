@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <link rel="stylesheet" href="style.css">
+<title>Login</title>
 <body>
 	<div class="login">
 		<form action="/ProyectoServlet/servletLogin" method="post">
@@ -24,5 +25,6 @@
 		}
 		%>
 	</div>
+	
 </body>
 </html>
