@@ -16,7 +16,7 @@ import com.example.demo.service.EmpleadoService;
 
 @Controller
 public class EmpleadoController {
-	
+	//comentarioprueba
 	@Autowired
 	private EmpleadoService servicio;
 	
