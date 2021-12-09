@@ -16,7 +16,7 @@ import com.example.demo.service.EmpleadoService;
 
 @Controller
 public class EmpleadoController {
-	//comentarioprueba
+	
 	@Autowired
 	private EmpleadoService servicio;
 	
@@ -54,7 +54,7 @@ public class EmpleadoController {
 		}
 	}
 	
-	@PostMapping("/empleado/edit/> t")
+	@PostMapping("/empleado/edit/submit")
 	public String editarEmpleadoSubmit(@Valid @ModelAttribute("empleado") Empleado empleado,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {

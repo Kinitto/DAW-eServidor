@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 public class ModelUsuario {
-	
+
 	@Min(1)
 	private long id;
 	@NotEmpty
@@ -18,20 +18,21 @@ public class ModelUsuario {
 	private String email;
 	private String telefono;
 	private String direccion;
-	
-	public ModelUsuario(){}
 
-	public ModelUsuario(long id,String nombre,String password,
-			String email,String telefono,String direecion){
-		
-		this.id=id;
-		this.nombre=nombre;
-		this.password=password;
-		this.email=email;
-		this.telefono=telefono;
-		this.direccion=direccion;
-		
+	public ModelUsuario() {
 	}
+
+	public ModelUsuario(long id, String nombre, String password, String email, String telefono, String direccion) {
+
+		this.id = id;
+		this.nombre = nombre;
+		this.password = password;
+		this.email = email;
+		this.telefono = telefono;
+		this.direccion = direccion;
+
+	}
+
 
 	public long getId() {
 		return id;
@@ -83,7 +84,7 @@ public class ModelUsuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(direccion, email, id, nombre, password, telefono);
+		return Objects.hash(nombre, password);
 	}
 
 	@Override
@@ -95,9 +96,7 @@ public class ModelUsuario {
 		if (getClass() != obj.getClass())
 			return false;
 		ModelUsuario other = (ModelUsuario) obj;
-		return Objects.equals(direccion, other.direccion) && Objects.equals(email, other.email) && id == other.id
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(password, other.password)
-				&& Objects.equals(telefono, other.telefono);
+		return Objects.equals(nombre, other.nombre) && Objects.equals(password, other.password);
 	}
 
 	@Override
@@ -105,6 +104,4 @@ public class ModelUsuario {
 		return "ModelUsuario [id=" + id + ", nombre=" + nombre + ", password=" + password + ", email=" + email
 				+ ", telefono=" + telefono + ", direccion=" + direccion + "]";
 	}
-	
-	
 }
