@@ -53,10 +53,20 @@ public class MainController {
 	
 
 	@GetMapping("/seleccion")
-	public String seleccion(Model model) {
-		model.addAttribute("listausuarios", servicioUsuario.findAll());
-		model.addAttribute("usuario", new ModelUsuario());
+	public String seleccion(Model model, HttpServletRequest request) {
+		HttpSession sesion = request.getSession();
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("usuario", sesion.getAttribute("usuario"));
 		return "seleccion";
+	}
+	
+
+	@PostMapping("/nuevopedido")
+	public String nuevopedido(Model model, HttpServletRequest request) {
+	
+		return "nuevopedido";
 	}
 
 }

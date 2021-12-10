@@ -12,7 +12,7 @@
 .section {
 	width: 100%;
 	min-height: 100vh;
-	background-color: #eee;
+	background-color: #333;
 }
 
 .cards {
@@ -83,7 +83,7 @@
 .boton {
 	color: #ffffff;
 	display: block;
-	background-color: #4a4d49;
+	background-color: rgb(119, 118, 123);
 	max-width: 140px;
 	padding: 12px 25px;
 	font-size: 12px;
@@ -233,8 +233,12 @@ table {
 	margin-left: 10px;
 }
 
-#welcome {
+.welcome {
 	font-size: 20px;
+	color: white;
+	text-align: center;
+	margin-top:7%;
+	
 }
 
 @import url(https://fonts.googleapis.com/css?family=Oswald:400,700);

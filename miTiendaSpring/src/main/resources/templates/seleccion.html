@@ -2,12 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="style.css">
 <body>
+ 	<div class="welcome">
+ 		<p><h1>Bienvenido</h1><h2 th:text=${usuario.nombre}></h2></p>
+ 	</div>
     <div class="container">
     <form method="post" action="/nuevopedido">
-        <button class="two"href="https://gogle.es">Nuevo pedido</button>
+        <button class="two">Nuevo pedido</button>
 	</form>
        <form method="post" action="/listpedido">
-        <button class="three"href="https://gogle.es">Lista pedidos</button>
+        <button class="three">Lista pedidos</button>
 	</form>
 </body>
 </html>
