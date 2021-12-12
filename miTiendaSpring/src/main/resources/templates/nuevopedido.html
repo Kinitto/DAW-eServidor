@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="style.css">
 <body>
-	<form action="/ProyectoServlet/servletCarrito" method="post">
+	<form action="#" method="post" th:action="@{nuevopedido/submit}" th:object="${productos}">
 
 		<div class="section">
 
 			<div class="cards">
 
-				<div class="new-producto">
-
-				</div>
-
 				<div class="card">
 
 					<div class="image-section">
-						<img src="camiseta.jpg">
+						<img src="Camiseta.jpg">
 					</div>
 
 					<div class="description">
@@ -29,16 +25,14 @@
 					</div>
 
 					<div class="button-group">
-						Cantidad: <input type="number" name="cantidad" class="cantidad"
-							value="0">
+						Cantidad: <input type="number" name="camisetacantidad" class="cantidad" value=0>	
 					</div>
 
 				</div>
-
 				<div class="card">
 
 					<div class="image-section">
-						<img src="pantalon.jpg">
+						<img src="Pantalon.jpg">
 					</div>
 
 					<div class="description">
@@ -46,22 +40,20 @@
 						<h1>Pantalon</h1>
 
 						<p>
-							<b>Precio</b><span>25$</span>
+							<b>Precio-</b><span>25$</span>
 						</p>
 
 					</div>
 
 					<div class="button-group">
-						Cantidad: <input type="number" name="cantidadp2" class="cantidad"
-							value="0">
+						Cantidad: <input type="number" name="pantaloncantidad" class="cantidad" value=0>	
 					</div>
 
 				</div>
-
 				<div class="card">
 
 					<div class="image-section">
-						<img src="abrigo.jpg">
+						<img src="Camiseta.jpg">
 					</div>
 
 					<div class="description">
@@ -69,17 +61,17 @@
 						<h1>Abrigo</h1>
 
 						<p>
-							<b>Precio</b><span>65$</span>
+							<b>Precio-</b><span>65$</span>
 						</p>
 
 					</div>
 
 					<div class="button-group">
-						Cantidad: <input type="number" name="cantidadp3" class="cantidad"
-							value="0">
+						Cantidad: <input type="number" name="abrigocantidad" class="cantidad" value=0>	
 					</div>
 
 				</div>
+				
 
 			</div>
 			<input type="submit" value="Resumen" class="boton">

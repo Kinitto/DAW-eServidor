@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="style.css">
+<body>
+<html>
+<link rel='stylesheet' href='/ProyectoServlet/HTML/style.css'>
+<body>
+	<p id=welcome>Este es el resumen de su pedido</p>
+	<br />
+	<table border='1' id='tablaCarrito'>
+		<tr>
+			<th>Producto</th>
+			<th>Cantidad</th>
+			<th>Precio</th>
+		</tr>
+		<tr th:each="producto : ${listaProducto}">
+			<td th:text="${producto.nombre}"></td>
+			<td th:text="${producto.cantidad}"></td>
+			<td th:text="${producto.precio}"></td>
+		</tr>
+	</table>
+
+	<form action="#" method="post" th:action="@{resumen/submit}">
+		<table border=0>
+			<header>
+				<br />Elige una opcion de envio.
+			</header>
+
+			<br />
+			<tr>
+				<td><input type=radio name=envio value=domicilio th:checked="${domicilio  == 'domicilio' ? false: true}"> Envio a
+					Envio a su domicilio. (2,50$)</td>
+			</tr>
+
+			<tr>
+				<td><input type=radio name=envio value=correo th:checked="${correo  == 'correo'}"> Envio a
+					su oficina de correos mas cercana. (1,25$)</td>
+			</tr>
+
+			<tr>
+				<td><input type=radio name=envio value=tienda th:checked="${tienda  == 'tienda'}">
+					Recogida en una de nuestras tiendas. (Gratuito)</td>
+			</tr>
+		</table>
+		<input type=submit id=btnResumen value=Tramitar>
+	</form>
+
+
+
+</body>
+</html>
