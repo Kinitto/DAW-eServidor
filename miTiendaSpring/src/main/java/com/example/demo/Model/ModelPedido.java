@@ -1,12 +1,13 @@
 package com.example.demo.Model;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.constraints.Min;
+
 public class ModelPedido {
 	
-	
+	private int id;
 	private List<ModelProducto> producto;
 	private String email;
 	private String telefono;
@@ -15,15 +16,23 @@ public class ModelPedido {
 	public ModelPedido() {
 		
 	}
-	
-	public ModelPedido(List<ModelProducto> product, String email, String telefono, String direccion) {
+
+	public ModelPedido(int id, List<ModelProducto> producto, String email, String telefono, String direccion) {
 		super();
-		this.producto = product;
+		this.id = id;
+		this.producto = producto;
 		this.email = email;
 		this.telefono = telefono;
 		this.direccion = direccion;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public List<ModelProducto> getProducto() {
 		return producto;
@@ -59,7 +68,7 @@ public class ModelPedido {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(direccion, email, producto, telefono);
+		return Objects.hash(direccion, email, id, producto, telefono);
 	}
 
 	@Override
@@ -71,15 +80,16 @@ public class ModelPedido {
 		if (getClass() != obj.getClass())
 			return false;
 		ModelPedido other = (ModelPedido) obj;
-		return Objects.equals(direccion, other.direccion) && Objects.equals(email, other.email)
+		return Objects.equals(direccion, other.direccion) && Objects.equals(email, other.email) && id == other.id
 				&& Objects.equals(producto, other.producto) && Objects.equals(telefono, other.telefono);
 	}
 
 	@Override
 	public String toString() {
-		return "ModelPedido [producto=" + producto + ", email=" + email + ", telefono=" + telefono + ", direccion="
-				+ direccion + "]";
+		return "ModelPedido [id=" + id + ", producto=" + producto + ", email=" + email + ", telefono=" + telefono
+				+ ", direccion=" + direccion + "]";
 	}
+
 
 		
 	}

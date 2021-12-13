@@ -204,8 +204,13 @@ td {
 	
 }
 
+li{
+	list-style:none;
+}
+
 table {
 	border-collapse: collapse;
+	
 }
 
 #BtnCalcular {
@@ -244,7 +249,7 @@ table {
 }
 
 @import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
-@import url(https://fonts.googleapis.com/css?family=Nunito:400,700);
+@import url(httpstablaCarrito://fonts.googleapis.com/css?family=Nunito:400,700);
   .container {
   width: 334px;
   margin: 0 auto;

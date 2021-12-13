@@ -103,7 +103,7 @@ public class MainController {
 
 		// Creo el pedido con todos los datos
 		ModelUsuario usuario = (ModelUsuario) sesion.getAttribute("usuario");
-		servicioPedido.add(new ModelPedido(product, usuario.getEmail(), usuario.getTelefono(), usuario.getDireccion()));
+		servicioPedido.add(new ModelPedido(1,product, usuario.getEmail(), usuario.getTelefono(), usuario.getDireccion()));
 
 		return "redirect:/resumen";
 	}
@@ -130,8 +130,18 @@ public class MainController {
 	@PostMapping("/resumen/submit")
 	public String resumenSubmit(@RequestParam String envio, Model model) {
 		sesion.setAttribute("envio", envio);
-		System.out.println(servicioPedido.findAll());
-		return "redirect:/resumen";
+		return "redirect:/listapedidos";
 	}
+	
+	@GetMapping("/listapedidos")
+	public String listapedido(Model model) {
+		model.addAttribute("listaPedido", servicioPedido.findAll());
+		model.addAttribute("listaProducto", servicioProducto.findAll());
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		}
+		System.out.println(servicioPedido.findAll());
+		return "listapedidos";
+	}	
 
 }

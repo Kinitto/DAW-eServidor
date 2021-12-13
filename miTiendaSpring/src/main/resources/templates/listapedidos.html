@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="style.css">
+<title>Login</title>
+<body>
+	<body>
+	<p id=welcome>Lista de pedido</p>
+	<br />
+	<table border='1' id='tablaCarrito'>
+		<tr>
+			<th>id Pedido</th>
+			<th>Productos</th>
+			<th>Direccion</th>
+			<th>Telefono</th>
+			
+		</tr>
+			<div th:each="pedido : ${listaPedido}" >
+		<tr>
+				<td th:text="${pedido.id}"></td>
+				<td>
+					<ul th:each="producto : ${pedido.producto}">
+						<li th:inline=text>
+							<span th:text="${producto.nombre + ' -'}"></span>
+							<span th:text="${producto.cantidad}"></span>
+						</li>
+					</ul>
+				</td>
+				<td th:text="${pedido.direccion}"></td>
+				<td th:text="${pedido.telefono}"></td>
+			</div>
+		</tr>
+	</table>
+</body>
+</html>
