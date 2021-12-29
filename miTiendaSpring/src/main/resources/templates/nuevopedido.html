@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="style.css">
 <body>
+<a href="/"> 
+	<input id="salir" type="submit" value="Cerrar sesion"/>
+</a>
 	<form action="#" method="post" th:action="@{nuevopedido/submit}" th:object="${productos}">
 
 		<div class="section">

@@ -5,9 +5,18 @@
 <html>
 <link rel='stylesheet' href='/ProyectoServlet/HTML/style.css'>
 <body>
-	<p id=welcome>Este es el resumen de su pedido</p>
+<a href="/"> 
+	<input id="salir" type="submit" value="Cerrar sesion"/>
+</a>
+<a href="/nuevopedido"> 
+	<input type="submit"  value="Volver a seleccionar productos" th:if="${hayproducto == 0}"/>
+</a>
+</br>
+</br>
+	<p id=welcome th:if="${hayproducto > 0}" >Este es el resumen de su pedido</p>
+	<h1 id=error th:if="${hayproducto == 0}" >Usted no ha seleccionado ningun producto, vuelva y seleccione almenos 1.</h1>
 	<br />
-	<table border='1' id='tablaCarrito'>
+	<table border='1' id='tablaCarrito' th:if="${hayproducto > 0}">
 		<tr>
 			<th>Producto</th>
 			<th>Cantidad</th>
@@ -16,12 +25,13 @@
 		<tr th:each="producto : ${listaProducto}">
 			<td th:text="${producto.nombre}"></td>
 			<td th:text="${producto.cantidad}"></td>
-			<td th:text="${producto.precio}"></td>
+			<td th:text="${producto.precio + '$'}"></td>
 		</tr>
+		
 	</table>
 
 	<form action="#" method="post" th:action="@{resumen/submit}">
-		<table border=0>
+		<table border=0 th:if="${hayproducto > 0}">
 			<header>
 				<br />Elige una opcion de envio.
 			</header>
@@ -42,7 +52,7 @@
 					Recogida en una de nuestras tiendas. (Gratuito)</td>
 			</tr>
 		</table>
-		<input type=submit id=btnResumen value=Tramitar>
+		<input type=submit id=btnResumen value=Tramitar th:if="${hayproducto > 0}">
 	</form>
 
 

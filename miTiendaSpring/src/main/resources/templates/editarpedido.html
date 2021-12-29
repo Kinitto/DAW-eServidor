@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../style.css">
+<title>Editar Pedido</title>
+<body>
+	<form action="#" th:action="@{/edit/submit}" 
+   		th:object="${pedido}" method="post">
+   		<table>
+   		
+   			<tr>
+   				<td><label>ID</label></td>
+   				<td>
+   					<input type="text" th:field="*{id}" th:attrappend="readonly=${pedido.id > 0} ? 'readonly' : null"/>
+   				</td>
+   			</tr>
+   			
+   			<tr>
+   			
+   			<tr th:each="product, stat :*{producto}">
+   			<td><label>Productos</label></td>
+   				<td>
+   					 <input readonly th:field="*{producto[__${stat.index}__].nombre}"/>
+       				 <input th:field="*{producto[__${stat.index}__].cantidad}"/>
+       				 <input hidden readonly th:field="*{producto[__${stat.index}__].precio}"/>
+    			</td>
+			</tr>
+   				
+   				
+   			<tr>
+   				<td><label>Direccion</label></td>
+   				<td>
+   					<input type="text" th:field="*{direccion}"/>
+				</td>
+   			</tr>
+   			
+   			<tr>
+   				<td><label>Telefono</label></td>
+   				<td><input type="text" th:field="*{telefono}"/></td>
+   			</tr>
+   			
+   			<tr>
+   				<td><label>Email</label></td>
+   				<td>
+   					<input type="text" th:field="*{email}"/>
+				</td>
+   			</tr>
+   			
+   			<tr>
+   				<td><label>Fecha</label></td>
+   				<td>
+   					<input readonly type="text" th:field="*{fecha}"/>
+				</td>
+   			</tr>
+   			<tr>
+   				<td><input type="submit" value="Aceptar"/></td>
+   			</tr>
+   		</table>
+   	</form>
+</body>
+</html>
+
+			

@@ -5,21 +5,32 @@ import java.util.Objects;
 import javax.validation.constraints.Min;
 
 public class ModelProducto {
-	
+
+	private int idPedido;
 	private String nombre;
 	@Min(1)
 	private int cantidad;
 	private int precio;
-	
+
 	public ModelProducto() {
-		
+
 	}
 
-	public ModelProducto(String nombre, int cantidad, int precio) {
+	public ModelProducto(int idPedido, String nombre, int cantidad, int precio) {
 		super();
+		this.idPedido = idPedido;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
 		this.precio = precio;
+
+	}
+
+	public int getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(int idPedido) {
+		this.idPedido = idPedido;
 	}
 
 	public String getNombre() {
@@ -48,7 +59,7 @@ public class ModelProducto {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cantidad, nombre, precio);
+		return Objects.hash(cantidad, idPedido, nombre, precio);
 	}
 
 	@Override
@@ -60,13 +71,14 @@ public class ModelProducto {
 		if (getClass() != obj.getClass())
 			return false;
 		ModelProducto other = (ModelProducto) obj;
-		return cantidad == other.cantidad && Objects.equals(nombre, other.nombre) && precio == other.precio;
+		return cantidad == other.cantidad && idPedido == other.idPedido && Objects.equals(nombre, other.nombre)
+				&& precio == other.precio;
 	}
 
 	@Override
 	public String toString() {
-		return "ModelProducto [nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + "]";
+		return "ModelProducto [idPedido=" + idPedido + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio="
+				+ precio + "]";
 	}
 
-	
 }
