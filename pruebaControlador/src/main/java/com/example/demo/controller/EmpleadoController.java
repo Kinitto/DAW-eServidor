@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Empleado;
 import com.example.demo.service.EmpleadoService;
@@ -21,8 +24,9 @@ public class EmpleadoController {
 	private EmpleadoService servicio;
 	
 	@GetMapping({"/", "/empleado/list"})
-	public String listado(Model model) {
-		model.addAttribute("listaEmpleados", servicio.findAll());
+	public String listado(Model model, @RequestParam(name="q", required=false) String query) {
+		List<Empleado> resultado = (query == null) ? servicio.findAll() : servicio.buscador(query);
+		model.addAttribute("listaEmpleados", resultado);
 		return "list";
 	}
 	
