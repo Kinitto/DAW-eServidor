@@ -46,7 +46,7 @@ public class MainController {
 	}
 	
 	/**
-	 * Recogemos los datos del usuario que hemos rellenado en el formulario y 
+	 * Recogemos los datos del usuario que hemos rellenado en el formulario 
 	 * se lo enviamos al servicio para que identifique todos los datos de ese usuario, comprobamos que el usuario no
 	 * es nulo y lo mandamos a la seleccion
 	 * si el usuario es nulo te devuelve de nuevo a login
