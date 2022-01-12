@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="style.css">
+<title>Login</title>
+<body>
+<a href="/"> 
+	<input id="salir" type="submit" value="Cerrar sesion"/>
+</a>
+<a href="/seleccion"> 
+	<input type="submit"  value="Volver atras" th:if="${hayproducto == 0}"/>
+</a>
+</br>
+</br>
+	<h1 id=error th:if="${hayproducto == 0}" >Aun no ha creado ningun pedido.</h1>
+	<p id=welcome th:if="${hayproducto > 0}">Lista de pedido</p>
+	<br />
+	<table border='1' id='tablaCarrito' th:if="${hayproducto > 0}">
+		<tr>
+			<th>id Pedido</th>
+			<th>Producto/Cant</th>
+			<th>Total</th>
+			<th>Envio</th>
+			<th>Direccion</th>
+			<th>Telefono</th>
+			<th>Correo</th>
+			<th>Fecha y Hora</th>
+			<th>Operaciones</th>
+			
+		</tr>
+			<div th:each="pedido : ${listaPedido}" >
+		<tr>
+				<td th:text="${pedido.id}"></td>
+				<td>
+					<ul th:each="producto : ${pedido.producto}">
+						<li>
+							<span th:text="${producto.nombre + ' |'}"></span>
+							<span th:text="${producto.cantidad}"></span>
+						</li>
+					</ul>
+				</td>
+				
+				<td>
+				<ul th:each="producto : ${pedido.producto}">
+						<li>
+							<span th:text="${producto.precio * producto.cantidad + '$'}"></span>
+						</li>
+					</ul>
+				</td>
+				<td th:if="${envio == 'domicilio'}">+2,50$</td>
+				<td th:if="${envio == 'correo'}">+1,25$</td>
+				<td th:if="${envio == 'tienda'}">+0,0$</td>
+				<td th:text="${pedido.direccion}"></td>
+				<td th:text="${pedido.telefono}"></td>
+				<td th:text="${pedido.email}"></td>
+				<td th:text="${pedido.fecha}"></td>
+				<td><a th:href="@{edit/{id}(id=${pedido.id})}">Editar</a>
+				<a th:href="@{delete/{id}(id=${pedido.id})}">Borrar</a></td>
+				
+		</tr>
+			</div>
+	</table>
+	</br>
+	<a href="/seleccion"> 
+	<input type="submit"  value="Seguir comprando" th:if="${hayproducto > 0}"/>
+</a>
+</body>
+</html>

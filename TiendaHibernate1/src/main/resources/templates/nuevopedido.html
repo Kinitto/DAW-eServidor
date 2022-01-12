@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="style.css">
+<body>
+<a href="/"> 
+	<input id="salir" type="submit" value="Cerrar sesion"/>
+</a>
+	<form action="#" method="post" th:action="@{nuevopedido/submit}" th:object="${productos}">
+
+		<div class="section">
+
+			<div class="cards">
+
+				<div class="card">
+
+					<div class="image-section">
+						<img src="Camiseta.jpg">
+					</div>
+
+					<div class="description">
+
+						<h1>Camiseta</h1>
+
+						<p>
+							<b>Precio-</b><span>15$</span>
+						</p>
+
+					</div>
+
+					<div class="button-group">
+						Cantidad: <input type="number" name="camisetacantidad" class="cantidad" value=0>	
+					</div>
+
+				</div>
+				<div class="card">
+
+					<div class="image-section">
+						<img src="Pantalon.jpg">
+					</div>
+
+					<div class="description">
+
+						<h1>Pantalon</h1>
+
+						<p>
+							<b>Precio-</b><span>25$</span>
+						</p>
+
+					</div>
+
+					<div class="button-group">
+						Cantidad: <input type="number" name="pantaloncantidad" class="cantidad" value=0>	
+					</div>
+
+				</div>
+				<div class="card">
+
+					<div class="image-section">
+						<img src="Camiseta.jpg">
+					</div>
+
+					<div class="description">
+
+						<h1>Abrigo</h1>
+
+						<p>
+							<b>Precio-</b><span>65$</span>
+						</p>
+
+					</div>
+
+					<div class="button-group">
+						Cantidad: <input type="number" name="abrigocantidad" class="cantidad" value=0>	
+					</div>
+
+				</div>
+				
+
+			</div>
+			<input type="submit" value="Resumen" class="boton">
+
+		</div>
+
+	</form>
+
+</body>
+</html>
+
