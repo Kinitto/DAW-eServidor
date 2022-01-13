@@ -1,16 +1,20 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_producto")
+@Table(name = "producto")  
 public class Producto implements Serializable{
 	
 	/**
@@ -18,24 +22,26 @@ public class Producto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	
 	private Long idProducto;
-		
+	
+	@OneToMany(mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<pedidoProducto> pedido = new ArrayList<>();
+	
 	private String nombre;
-	
-	private int cantidad;
-	
+		
 	private int precio;
 
 	public Producto() {
 
 	}
 	
-	
-	public Producto(Long idProducto, String nombre, int cantidad, int precio) {
+
+	public Producto(Long idProducto, List<pedidoProducto> pedido, String nombre, int precio) {
 		super();
 		this.idProducto = idProducto;
+		this.pedido = pedido;
 		this.nombre = nombre;
-		this.cantidad = cantidad;
 		this.precio = precio;
 	}
 
@@ -50,6 +56,16 @@ public class Producto implements Serializable{
 		this.idProducto = idProducto;
 	}
 	
+	
+	public List<pedidoProducto> getPedidos() {
+		return pedido;
+	}
+
+	public void setPedidos(List<pedidoProducto> pedido) {
+		this.pedido = pedido;
+	}
+	
+	
 	@Column(nullable = false)
 	public String getNombre() {
 		return nombre;
@@ -59,14 +75,6 @@ public class Producto implements Serializable{
 		this.nombre = nombre;
 	}
 	
-	@Column(nullable = false)
-	public int getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
 	
 	@Column(nullable = false)
 	public int getPrecio() {
@@ -76,5 +84,9 @@ public class Producto implements Serializable{
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
+
+
+	
+	
 
 }

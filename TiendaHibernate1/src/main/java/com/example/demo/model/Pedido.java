@@ -1,17 +1,22 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_pedido")
+@Table(name = "pedido")
 public class Pedido implements Serializable{
 	
 	/**
@@ -19,9 +24,11 @@ public class Pedido implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Long idPedido;
 	
-	private List<Producto> producto;
+	 
+	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<pedidoProducto> productos = new ArrayList<>();
 	
 	private String email;
 	
@@ -36,66 +43,92 @@ public class Pedido implements Serializable{
 
 	}
 
-	public Pedido(Long id, List<Producto> producto, String email, String telefono, String direccion,
+	
+
+	public Pedido(Long idPedido, List<pedidoProducto> productos, String email, String telefono, String direccion,
 			String fecha) {
 		super();
-		this.id = id;
-		this.producto = producto;
+		this.idPedido = idPedido;
+		this.productos = productos;
 		this.email = email;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.fecha = fecha;
 	}
 
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return id;
+	public Long getIdPedido() {
+		return idPedido;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+
+
+	public void setIdPedido(Long idPedido) {
+		this.idPedido = idPedido;
 	}
 
-	@Column(nullable = false)
-	public List<Producto> getProducto() {
-		return producto;
+
+	public List<pedidoProducto> getProductos() {
+		return productos;
 	}
 
-	public void setProducto(List<Producto> producto) {
-		this.producto = producto;
+
+
+	public void setProductos(List<pedidoProducto> productos) {
+		this.productos = productos;
 	}
+
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 	public String getTelefono() {
 		return telefono;
 	}
 
+
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+
 
 	public String getDireccion() {
 		return direccion;
 	}
 
+
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
+
 
 	public String getFecha() {
 		return fecha;
 	}
 
+
+
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
+
+	
+	
 
 }
