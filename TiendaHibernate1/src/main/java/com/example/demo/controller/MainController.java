@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioServiceI;
@@ -83,6 +86,57 @@ public class MainController {
 		}
 		model.addAttribute("usuario", sesion.getAttribute("usuario"));
 		return "seleccion";
+	}
+	
+	/**
+	 * El submit de nuestro pedido, recogemos los datos de cantidad que ha seleccionado
+	 * el usuario y  creamos el objeto pedido al completo.
+	 * @param camisetacantidad
+	 * @param pantaloncantidad
+	 * @param abrigocantidad
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/nuevopedido/submit")
+	public String nuevopedidoSubmit(@RequestParam("camisetacantidad") int camisetacantidad,
+			@RequestParam("pantaloncantidad") int pantaloncantidad, @RequestParam("abrigocantidad") int abrigocantidad,
+			Model model) {
+
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		}
+
+		Date date = new Date();
+		//int pedidosize = servicioPedido.cantidad() + 1;
+		int id = 0;
+
+		// si la cantidad que introduces es mayor de 0 se añade el producto.
+		if (camisetacantidad > 0) {
+		//	servicioProducto.add(new ModelProducto(pedidosize, "Camiseta", camisetacantidad, 15));
+		}
+		if (pantaloncantidad > 0) {
+		//	servicioProducto.add(new ModelProducto(pedidosize, "Pantalon", pantaloncantidad, 25));
+		}
+		if (abrigocantidad > 0) {
+		//	servicioProducto.add(new ModelProducto(pedidosize, "Abrigo", abrigocantidad, 65));
+		}
+
+		if (camisetacantidad > 0 || pantaloncantidad > 0 || abrigocantidad > 0) {
+
+		//  Creo el pedido con todos los datos
+		//	List<ModelProducto> producto = servicioProducto.findProducto(pedidosize);
+
+		//	ModelUsuario usuario = (ModelUsuario) sesion.getAttribute("usuario");
+		//	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+		//	if (id < pedidosize) {
+		//		servicioPedido.add(new ModelPedido(pedidosize, producto, usuario.getEmail(), usuario.getTelefono(),
+		//				usuario.getDireccion(), formatter.format(date)));
+
+		//	}
+		}
+
+		return "redirect:/resumen";
 	}
 	
 }

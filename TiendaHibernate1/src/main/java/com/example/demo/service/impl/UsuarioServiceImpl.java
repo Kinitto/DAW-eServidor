@@ -13,7 +13,7 @@ import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.UsuarioServiceI;
 
 @Primary
-@Service("UsuarioServiceDB")
+@Service("UsuarioServiceImpl")
 public class UsuarioServiceImpl implements UsuarioServiceI {
 
 	@Autowired
