@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pedidoProducto")
-@IdClass(pedidoProductoID.class)
+@Table(name = "t_pedidoProducto")
 public class pedidoProducto implements Serializable {
 
 	
@@ -20,9 +20,25 @@ public class pedidoProducto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idPedidoProducto;
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(
+				name="pedido_id",
+				insertable = false, updatable = false
+	)
 	private Pedido pedido;
- 
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(
+				name="producto_id",
+				insertable = false, updatable = false
+	)
     private Producto producto;
     
     private int cantidad;
@@ -36,12 +52,7 @@ public class pedidoProducto implements Serializable {
 		this.producto = producto;
 		this.cantidad = cantidad;
 	}
-	@Id
-	@ManyToOne
-	@JoinColumn(
-				name="pedido_id",
-				insertable = false, updatable = false
-	)
+	
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -50,12 +61,7 @@ public class pedidoProducto implements Serializable {
 		this.pedido = pedido;
 	}
 
-	@Id
-	@ManyToOne
-	@JoinColumn(
-				name="producto_id",
-				insertable = false, updatable = false
-	)
+	
 	public Producto getProducto() {
 		return producto;
 	}

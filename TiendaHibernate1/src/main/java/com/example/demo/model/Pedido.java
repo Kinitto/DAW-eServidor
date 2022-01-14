@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pedido")
+@Table(name = "t_pedido")
 public class Pedido implements Serializable{
 	
 	/**
@@ -24,6 +21,8 @@ public class Pedido implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPedido;
 	
 	 
@@ -57,8 +56,7 @@ public class Pedido implements Serializable{
 	}
 
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	public Long getIdPedido() {
 		return idPedido;
 	}

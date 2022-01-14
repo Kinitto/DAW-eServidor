@@ -4,7 +4,7 @@
 <title>Login</title>
 <body>
 <div class="error" id="error" th:if="${error}">
-		   <p>Error</p>
+		   <p>Error al introducir Usuario o Contraseña.</p>
 	</div>
 	<div class="login">
 		<form action="#" th:action="@{login/submit}" th:object="${usuario}" method="post">

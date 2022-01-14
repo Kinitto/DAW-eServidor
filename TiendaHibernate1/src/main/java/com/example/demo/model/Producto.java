@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "producto")  
+@Table(name = "t_producto")  
 public class Producto implements Serializable{
 	
 	/**
@@ -22,7 +22,8 @@ public class Producto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProducto;
 	
 	@OneToMany(mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,10 +33,14 @@ public class Producto implements Serializable{
 		
 	private int precio;
 
-	public Producto() {
-
-	}
 	
+
+
+	public Producto(String nombre, int precio) {
+		super();
+		this.nombre = nombre;
+		this.precio = precio;
+	}
 
 	public Producto(Long idProducto, List<pedidoProducto> pedido, String nombre, int precio) {
 		super();
@@ -45,9 +50,6 @@ public class Producto implements Serializable{
 		this.precio = precio;
 	}
 
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getIdProducto() {
 		return idProducto;
 	}

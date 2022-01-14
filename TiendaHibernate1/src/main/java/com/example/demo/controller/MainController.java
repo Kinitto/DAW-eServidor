@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioServiceI;
@@ -60,7 +61,7 @@ public class MainController {
 	 */
 
 	@PostMapping("/login/submit")
-	public String nuevoUsuarioSubmit(Usuario usuarioDTO, Model model) {
+	public String nuevoUsuarioSubmit(Usuario usuarioDTO, Model model, RedirectAttributes redirectAtributos) {
 
 		Usuario usuario = servicioUsuario.findUser(usuarioDTO);
 
@@ -68,7 +69,7 @@ public class MainController {
 		sesion.setAttribute("usuario", usuario);
 			return "redirect:/seleccion";
 		} else {
-		model.addAttribute("error", true);
+		redirectAtributos.addFlashAttribute("error" ,true);
 		return "redirect:/login";
 
 	}
@@ -89,6 +90,23 @@ public class MainController {
 	}
 	
 	/**
+	 * comprueba que el usuario existe y muestra la pagina de crear pedido
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+
+	@GetMapping("/nuevopedido")
+	public String nuevopedido(Model model) {
+
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		}
+
+		return "nuevopedido";
+	}
+
+	/**
 	 * El submit de nuestro pedido, recogemos los datos de cantidad que ha seleccionado
 	 * el usuario y  creamos el objeto pedido al completo.
 	 * @param camisetacantidad
@@ -107,7 +125,6 @@ public class MainController {
 		}
 
 		Date date = new Date();
-		//int pedidosize = servicioPedido.cantidad() + 1;
 		int id = 0;
 
 		// si la cantidad que introduces es mayor de 0 se añade el producto.
@@ -138,5 +155,35 @@ public class MainController {
 
 		return "redirect:/resumen";
 	}
+	
+	/**
+	 * obtenemos el resumen del pedido con su precio y seleccionamos el tipo de envio
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/resumen")
+	public String resumen(Model model) {
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		}
+		// Crear y enviar las variables para saber que metodo de envio se selecciona.
+		String domicilio = "";
+		String correo = "";
+		String tienda = "";
+
+	//	model.addAttribute("domicilio", domicilio);
+		//	model.addAttribute("correo", correo);
+		//model.addAttribute("tienda", tienda);
+		//int pedidosize = servicioPedido.cantidad();
+		//model.addAttribute("hayproducto", pedidosize);
+		//	model.addAttribute("listaProducto", servicioProducto.findProducto(servicioPedido.cantidad()));
+		return "resumen";
+	}
+
+	/**
+	 * comprobamos que existe usuario y enviamos a lista de pedidos.
+	 * @param model
+	 * @return
+	 */
 	
 }
