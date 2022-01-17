@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -57,6 +58,20 @@ public class Pedido implements Serializable{
 
 
 	
+	
+
+
+
+	public Pedido(String email, String telefono, String direccion, String fecha) {
+		this.email = email;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.fecha = fecha;
+
+	}
+
+
+
 	public Long getIdPedido() {
 		return idPedido;
 	}

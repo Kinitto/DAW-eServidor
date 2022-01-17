@@ -1,18 +1,19 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "t_pedidoProducto")
+@IdClass(pedidoProducto.class)
 public class pedidoProducto implements Serializable {
 
 	
@@ -47,7 +48,7 @@ public class pedidoProducto implements Serializable {
 	}
 
 	public pedidoProducto(Pedido pedido, Producto producto, int cantidad) {
-		super();
+
 		this.pedido = pedido;
 		this.producto = producto;
 		this.cantidad = cantidad;
@@ -78,24 +79,6 @@ public class pedidoProducto implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(pedido, producto);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		pedidoProducto that = (pedidoProducto) obj;
-		return Objects.equals(pedido, that.pedido) && Objects.equals(producto, that.producto);
-	}
 	
-	
-    
     
 }

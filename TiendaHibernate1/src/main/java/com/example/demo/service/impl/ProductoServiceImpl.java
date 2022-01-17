@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Producto;
+import com.example.demo.model.Usuario;
 import com.example.demo.repository.ProductoRepository;
 import com.example.demo.service.ProductoServiceI;
 
@@ -33,9 +34,9 @@ public class ProductoServiceImpl implements ProductoServiceI {
 	@PostConstruct
 	public void init() {
 		productoRepository.saveAll(Arrays.asList(
-				new Producto("Camiseta",15),
-				new Producto("Pantalon",25),
-				new Producto("Camiseta",65)));
+				new Producto(1, "Camiseta",15),
+				new Producto(2,"Pantalon",25),
+				new Producto(3, "Abrigo",65)));
 	}
 
 }
