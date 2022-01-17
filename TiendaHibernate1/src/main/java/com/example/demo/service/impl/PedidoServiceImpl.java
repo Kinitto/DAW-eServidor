@@ -24,7 +24,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 	@Override
 	public Pedido findById(long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return pedidoRepository.findById(id).orElse(null);
 	}
 
 }

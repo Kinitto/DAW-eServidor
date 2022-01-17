@@ -13,12 +13,12 @@ import com.example.demo.service.pedidoProductoServiceI;
 public class pedidoProductoServiceImpl implements pedidoProductoServiceI {
 
 	@Autowired
-	private pedidoProductoRepository pedidoProductoRepo;
+	private pedidoProductoRepository pedidoProductoRepository;
 	
 	@Override
 	public pedidoProducto save(pedidoProducto pedidoProducto) {
 		// TODO Auto-generated method stub
-		return pedidoProductoRepo.save(pedidoProducto);
+		return pedidoProductoRepository.save(pedidoProducto);
 	}
 
 	@Override
