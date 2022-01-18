@@ -149,7 +149,7 @@ public class MainController {
 		if (camisetacantidad > 0 || pantaloncantidad > 0 || abrigocantidad > 0) {
 
 			Pedido pedido = new Pedido(usuario.getEmail(), usuario.getTelefono(), usuario.getDireccion(),
-					formatter.format(date));
+					formatter.format(date), usuario);
 			servicioPedido.save(pedido);
 
 			if (camisetacantidad > 0) {

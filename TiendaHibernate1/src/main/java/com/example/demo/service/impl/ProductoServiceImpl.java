@@ -22,7 +22,7 @@ public class ProductoServiceImpl implements ProductoServiceI {
 	@Override
 	public Producto save(Producto producto) {
 		// TODO Auto-generated method stub
-		return null;
+		return productoRepository.save(producto);
 	}
 
 	@Override

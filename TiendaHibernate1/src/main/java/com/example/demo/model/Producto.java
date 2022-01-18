@@ -24,10 +24,7 @@ public class Producto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idProducto;
-
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<pedidoProducto> pedido = new ArrayList<>();
+	private long idProducto;
 
 	private String nombre;
 
@@ -50,14 +47,6 @@ public class Producto implements Serializable {
 
 	public void setIdProducto(Long idProducto) {
 		this.idProducto = idProducto;
-	}
-
-	public List<pedidoProducto> getPedidos() {
-		return pedido;
-	}
-
-	public void setPedidos(List<pedidoProducto> pedido) {
-		this.pedido = pedido;
 	}
 
 	@Column(nullable = false)

@@ -2,14 +2,16 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,10 +26,10 @@ public class Pedido implements Serializable{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idPedido;
+	private long idPedido;
 	
 	 
-	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany( fetch =  FetchType.EAGER)
 	private List<pedidoProducto> productos = new ArrayList<>();
 	
 	private String email;
@@ -37,7 +39,9 @@ public class Pedido implements Serializable{
 	private String direccion;
 	
 	private String fecha;
-
+	@ManyToOne
+	@JoinColumn(name="user_id", foreignKey = @ForeignKey(name="USER_ID_FK"))
+	private Usuario usuario;
 	
 	public Pedido() {
 
@@ -45,7 +49,7 @@ public class Pedido implements Serializable{
 
 	
 
-	public Pedido(Long idPedido, List<pedidoProducto> productos, String email, String telefono, String direccion,
+	public Pedido(long idPedido, List<pedidoProducto> productos, String email, String telefono, String direccion,
 			String fecha) {
 		super();
 		this.idPedido = idPedido;
@@ -57,17 +61,12 @@ public class Pedido implements Serializable{
 	}
 
 
-	
-	
-
-
-
-	public Pedido(String email, String telefono, String direccion, String fecha) {
+	public Pedido(String email, String telefono, String direccion, String fecha, Usuario usuario) {
 		this.email = email;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.fecha = fecha;
-
+		this.usuario = usuario;
 	}
 
 

@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "t_pedidoProducto")
-@IdClass(pedidoProducto.class)
 public class pedidoProducto implements Serializable {
 
 	
@@ -26,20 +25,11 @@ public class pedidoProducto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPedidoProducto;
 	
-	@Id
+	
 	@ManyToOne
-	@JoinColumn(
-				name="pedido_id",
-				insertable = false, updatable = false
-	)
 	private Pedido pedido;
 	
-	@Id
 	@ManyToOne
-	@JoinColumn(
-				name="producto_id",
-				insertable = false, updatable = false
-	)
     private Producto producto;
     
     private int cantidad;
@@ -54,6 +44,16 @@ public class pedidoProducto implements Serializable {
 		this.cantidad = cantidad;
 	}
 	
+	
+	
+	public Long getIdPedidoProducto() {
+		return idPedidoProducto;
+	}
+
+	public void setIdPedidoProducto(Long idPedidoProducto) {
+		this.idPedidoProducto = idPedidoProducto;
+	}
+
 	public Pedido getPedido() {
 		return pedido;
 	}
