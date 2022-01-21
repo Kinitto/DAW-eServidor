@@ -1,3 +1,14 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+ body
+{
+  background:#333;
+}
 .section {
 	width: 100%;
 	min-height: 100vh;
@@ -229,20 +240,6 @@ table {
 	margin-left: 10px;
 }
 
-.welcome {
-	font-size: 20px;
-	color: white;
-	text-align: center;
-	margin-top:7%;
-	
-}
-.marca {
-	font-size: 38px;
-	color: white;
-	text-align: center;
-	margin-top:7%;
-	
-}
 
 @import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
 @import url(httpstablaCarrito://fonts.googleapis.com/css?family=Nunito:400,700);
