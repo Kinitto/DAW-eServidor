@@ -3,18 +3,21 @@
 <link rel="stylesheet" href="style.css">
 <title>Login</title>
 <body>
-	<a href="/"> <input id="salir" type="submit" value="Cerrar sesion" />
+	<a href="/"> <input class="cerrar" id="salir" type="submit" value="Cerrar sesión" />
 	</a>
-	<a href="/seleccion"> <input type="submit" value="Volver atras"
+	<a href="/seleccion"> <input type="submit" class="continuar" value="Volver atras"
 		th:if="${hayproducto == 0}" />
 	</a>
+	<a href="/seleccion"> <input class="continuar" type="submit" value="Seguir comprando"
+		th:if="${hayproducto > 0}" />
+	</a>
 	</br>
 	</br>
-	<h1 id=error th:if="${hayproducto == 0}">Aún no ha creado ningun
+	<h1 class="text" id=error th:if="${hayproducto == 0}">Aún no ha creado ningun
 		pedido.</h1>
-	<p id=welcome th:if="${hayproducto > 0}">Lista de pedido</p>
+	<p class="welcome" id=welcome th:if="${hayproducto > 0}">Lista de pedido</p>
 	<br />
-	<table border='1' id='tablaCarrito' th:if="${hayproducto > 0}">
+	<table class="listaPedido" border='1' id='tablaCarrito' th:if="${hayproducto > 0}">
 		<tr>
 			<th>id Pedido</th>
 			<th>cod Pedido</th>
@@ -48,6 +51,7 @@
 			</div>
 		</div>
 	</table>
+	</br>
 	
 
 </body>

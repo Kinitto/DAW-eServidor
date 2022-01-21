@@ -6,15 +6,15 @@
 <link rel='stylesheet' href='/ProyectoServlet/HTML/style.css'>
 <body>
 <a href="/"> 
-	<input id="salir" type="submit" value="Cerrar sesion"/>
+	<input class="cerrar" id="salir" type="submit" value="Cerrar sesión"/>
 </a>
 <a href="/nuevopedido"> 
-	<input type="submit"  value="Volver a seleccionar productos" th:if="${hayproducto == 0}"/>
+	<input type="submit" class="continuar"  value="Volver a seleccionar productos" th:if="${hayproducto == 0}"/>
 </a>
 </br>
 </br>
-	<p id=welcome th:if="${hayproducto > 0}" >Este es el resumen de su pedido</p>
-	<h1 id=error th:if="${hayproducto == 0}" >Usted no ha seleccionado ningun producto, vuelva y seleccione almenos 1.</h1>
+	<h3 class="text" id=welcome th:if="${hayproducto > 0}" >Este es el resumen de su pedido</h3>
+	<h1 class="error" id=error th:if="${hayproducto == 0}" >No ha seleccionado ningun producto, vuelva y seleccione al menos 1.</h1>
 	<br />
 	<table border='1' id='tablaCarrito' th:if="${hayproducto > 0}">
 		<tr>
@@ -42,7 +42,7 @@
 	<form action="#" method="post" th:action="@{resumen/submit}">
 		<table border=0 th:if="${hayproducto > 0}">
 			<header>
-				<br />Elige una opcion de envio.
+				<br /><h3 class="text">Elige una opcion de envio</h3>.
 			</header>
 
 			<br />

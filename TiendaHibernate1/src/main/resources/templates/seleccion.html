@@ -4,11 +4,11 @@
 <body>
 <div id="outSesion">
 <a href="/"> 
-	<input id="salir" type="submit" value="Cerrar sesion"/>
+	<input class="cerrar" id="salir" type="submit" value="Cerrar sesión"/>
 </a>
 </div>
  	<div class="welcome">
- 		<p><h1>Bienvenido</h1><h2 th:text=${usuario.nombre}></h2></p>
+ 		<p>Bienvenido<p th:text=${usuario.nombre}></p></p>
  	</div>
     <div class="container">
     <form method="get" action="/nuevopedido">

@@ -7,7 +7,7 @@
 
  body
 {
-  background:#333;
+  background: #333
 }
 .section {
 	width: 100%;
@@ -190,28 +190,11 @@
 	font-weight: bold;
 }
 
-th {
-	text-align: center;
-	background-color: #BABABA;
-	border: 1px solid #000000;
-	padding: 5px
-}
-
-td {
-	padding: 5px;
-	border: 1px solid #000000;
-	background-color: #EDEDED;
-	
-}
-
 li{
 	list-style:none;
 }
 
-table {
-	border-collapse: collapse;
-	
-}
+
 
 #BtnCalcular {
 	font-family: segoe UI;
@@ -317,5 +300,93 @@ table {
   font-weight: 700;
 }
   
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto');
+  
+  
+.listaPedido{
+ position: absolute;
+ z-index: 2;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%,-50%);
+ width: 60%; 
+ border-collapse: collapse;
+ border-spacing: 0;
+ box-shadow: 0 2px 15px rgba(59, 59, 59, 0.7);
+ border-radius: 12px 12px 0 0;
+ overflow: hidden;
 
+}
+table{
+ border-collapse: collapse;
+ border-spacing: 0;
+ box-shadow: 0 2px 15px rgba(59, 59, 59, 0.7);
+ overflow: hidden;
+}
+
+td , th{
+ padding: 15px 20px;
+ text-align: center;
+ 
+}
+th{
+ background-color: #505050;
+ color: #fafafa;
+ font-family: 'Open Sans',Sans-serif;
+ font-weight: 200;
+ text-transform: uppercase;
+
+}
+tr{
+ width: 100%;
+ background-color: #fafafa;
+ font-family: 'Montserrat', sans-serif;
+}
+tr:nth-child(even){
+ background-color: #eeeeee;
+}
+
+.welcome{
+	color:white; 
+	text-align:center;
+	font-size:38px;
+	margin-top:180px;
+}
+  .marca{
+	color:white;
+	text-align:center;
+}
+  
+ .text{
+ 	color:white;
+ 
+ }
+
+.cerrar {
+	font-size: 20px;
+	background-color: white;
+  color: black;
+  border: 2px solid #f44336; 
+    transition-duration: 0.4s;
+  padding: 8px 8px;
+} 
+
+.cerrar:hover {
+  background-color: #f44336; 
+  color: white;
+}
+
+.continuar {
+	font-size: 20px;
+	background-color: white;
+  color: black;
+  border: 2px solid #4CAF50; 
+    transition-duration: 0.4s;
+  padding: 8px 8px;
+} 
+
+.continuar:hover {
+  background-color: #4CAF50; 
+  color: white;
+}
   
