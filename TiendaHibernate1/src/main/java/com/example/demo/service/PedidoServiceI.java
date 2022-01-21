@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.example.demo.model.Pedido;
+import com.example.demo.model.PedidoProducto;
 import com.example.demo.model.Usuario;
 import com.example.demo.model.dto.PedidoProductoDTO;
 
@@ -20,11 +21,13 @@ public interface PedidoServiceI {
 
 	public void setTotal(Pedido pedidoActual, double total);
 
-	public List<Pedido> findProductsFromUser(Long id);
+	public List<Pedido> findOrdersFromUser(Long id);
 	
 	public void delete(Pedido pedidoActual);
 
-	public void edit(Pedido pedido);
+	public void edit(Pedido pedidoModificado, Pedido pedidoActual);
+
+	public void addEnvio(Pedido pedidoActual, String envio);
 
 
 }

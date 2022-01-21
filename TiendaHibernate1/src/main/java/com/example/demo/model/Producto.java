@@ -55,6 +55,7 @@ public class Producto implements Serializable {
 
 	public String getNombre() {
 		return nombre;
+
 	}
 
 	public void setNombre(String nombre) {

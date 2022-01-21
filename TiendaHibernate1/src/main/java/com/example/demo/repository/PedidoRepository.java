@@ -20,6 +20,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 			+ "WHERE "
 			+ "	tpe.user_id = tu.id_usuario "
 			+ "	AND tu.id_usuario = ?1" , nativeQuery = true)
-	List<Pedido> findProductsFromUser(Long id);
+	List<Pedido> findOrdersFromUser(Long id);
 
 }

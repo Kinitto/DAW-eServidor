@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.PedidoProducto;
 import com.example.demo.model.Producto;
 import com.example.demo.model.dto.PedidoProductoDTO;
 import com.example.demo.model.mapper.ProductoMapper;
@@ -48,6 +49,12 @@ public class ProductoServiceImpl implements ProductoServiceI {
 				new Producto(null, "Camiseta de Gatos",15),
 				new Producto(null,"Pantalon Vaquero",25),
 				new Producto(null, "Bomber Deportiva",65)));
+	}
+
+	@Override
+	public List<Producto> findProducts(long id) {
+		// TODO Auto-generated method stub
+		return productoRepository.findProducts(id);
 	}
 
 }

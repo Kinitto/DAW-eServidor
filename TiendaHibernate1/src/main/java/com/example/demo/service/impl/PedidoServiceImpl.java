@@ -67,9 +67,9 @@ public class PedidoServiceImpl implements PedidoServiceI {
 	}
 	
 	@Override
-	public List<Pedido> findProductsFromUser(Long id) {
+	public List<Pedido> findOrdersFromUser(Long id) {
 
-		return pedidoRepository.findProductsFromUser(id);
+		return pedidoRepository.findOrdersFromUser(id);
 	}
 
 	@Override
@@ -83,6 +83,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		
 		return total;
 	}
+	
 
 	@Override
 	public void setTotal(Pedido pedidoActual, double total) {
@@ -91,6 +92,8 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		pedidoRepository.save(pedidoActual);
 
 	}
+	
+	
 
 	@Override
 	public void delete(Pedido pedidoActual) {
@@ -100,10 +103,30 @@ public class PedidoServiceImpl implements PedidoServiceI {
 	}
 
 	@Override
-	public void edit(Pedido pedido) {
-		// TODO Auto-generated method stub
+	public void edit(Pedido pedidoModificado, Pedido pedidoActual) {
+
+		Pedido pedido = pedidoActual;
 		
+		pedido.setDireccion(pedidoModificado.getDireccion());
+		pedido.setTelefono(pedidoModificado.getTelefono());
+		pedido.setEmail(pedidoModificado.getEmail());
+		pedido.setProductos(pedidoModificado.getProductos());
+
+		pedidoRepository.save(pedido);
+
 	}
+
+	@Override
+	public void addEnvio(Pedido pedidoActual, String envio) {
+
+		Pedido pedido = pedidoActual;
+		
+		pedido.setTipoEnvio(envio);
+		pedidoRepository.save(pedido);
+
+	}
+
+	
 
 	
 

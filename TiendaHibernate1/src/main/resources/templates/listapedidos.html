@@ -27,28 +27,28 @@
 
 		</tr>
 		<div th:each="pedido : ${listaPedidos}">
-		<div th:if="${pedido.borrado == false && pedido.totalPrecio > 3}">
-			<tr>
-				<td th:text="${pedido.id}"></td>
-				<td th:text="${pedido.codPedido}"></td>
-				<td th:if="${envio == 'domicilio'}" th:text="${pedido.totalPrecio + 2.50}"></td>
-				<td th:if="${envio == 'correo'}" th:text="${pedido.totalPrecio + 1.25}"></td>
-				<td th:if="${envio == 'tienda'}" th:text="${pedido.totalPrecio}"></td>
-				<td th:if="${envio == null}" th:text="${pedido.totalPrecio}"></td>
-				<td th:text="${pedido.direccion}"></td>
-				<td th:text="${pedido.telefono}"></td>
-				<td th:text="${pedido.email}"></td>
-				<td th:text="${pedido.fechaCompra}"></td>
-				<td><a th:href="@{edit/{id}(id=${pedido.id})}">Editar</a> <a
-					th:href="@{delete/{id}(id=${pedido.id})}">Borrar</a></td>
+			<div th:if="${pedido.borrado == false && pedido.totalPrecio > 3}">
+				<tr>
+					<td th:text="${pedido.id}"></td>
+					<td th:text="${pedido.codPedido}"></td>
+					<td th:if="${pedido.tipoEnvio == 'domicilio'}"
+						th:text="${pedido.totalPrecio + 2.50}"></td>
+					<td th:if="${pedido.tipoEnvio == 'correo'}"
+						th:text="${pedido.totalPrecio + 1.25}"></td>
+					<td th:if="${pedido.tipoEnvio == 'tienda'}"
+						th:text="${pedido.totalPrecio}"></td>
+					<td th:text="${pedido.direccion}"></td>
+					<td th:text="${pedido.telefono}"></td>
+					<td th:text="${pedido.email}"></td>
+					<td th:text="${pedido.fechaCompra}"></td>
+					<td><a th:href="@{edit/{id}(id=${pedido.id})}">Editar</a> <a
+						th:href="@{delete/{id}(id=${pedido.id})}">Borrar</a></td>
 
-			</tr>
-		</div>
+				</tr>
+			</div>
 		</div>
 	</table>
-	</br>
-	<a href="/seleccion"> <input type="submit" value="Seguir comprando"
-		th:if="${hayproducto > 0}" />
-	</a>
+	
+
 </body>
 </html>

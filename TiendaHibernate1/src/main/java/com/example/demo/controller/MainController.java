@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Pedido;
+import com.example.demo.model.PedidoProducto;
+import com.example.demo.model.Producto;
 import com.example.demo.model.Usuario;
 import com.example.demo.model.dto.PedidoProductoDTO;
 import com.example.demo.service.PedidoProductoServiceI;
@@ -197,8 +199,12 @@ public class MainController {
 		if (sesion.getAttribute("usuario") == null) {
 			return "redirect:/login";
 		}
-		sesion.setAttribute("envio",envio);
+		Long id = (Long) sesion.getAttribute("idPedido");
 
+		Pedido pedidoActual = servicioPedido.findById(id);
+
+			servicioPedido.addEnvio(pedidoActual,envio);
+		
 		return "redirect:/listapedidos";
 	}
 
@@ -218,15 +224,12 @@ public class MainController {
 		}
 		Usuario usuario = (Usuario) sesion.getAttribute("usuario");
 		
-		String envio = (String) sesion.getAttribute("envio");
 
-		List<Pedido> listaPedidos = servicioPedido.findProductsFromUser(usuario.getId());
+		List<Pedido> listaPedidos = servicioPedido.findOrdersFromUser(usuario.getId());
 		int pedidosize = listaPedidos.size();
 		
-		System.out.println(envio);
 		model.addAttribute("hayproducto", pedidosize);
 		model.addAttribute("listaPedidos", listaPedidos);
-		model.addAttribute("envio",envio);
 		
 		return "listapedidos";
 	}
@@ -244,9 +247,11 @@ public class MainController {
 		if (sesion.getAttribute("usuario") == null) {
 			return "redirect:/login";
 		}
+		
 		Pedido pedido = servicioPedido.findById(id);
 
 		model.addAttribute("pedido", pedido);
+
 
 	
 		return "editarpedido";
@@ -260,11 +265,23 @@ public class MainController {
 	 * @return
 	 */
 	@PostMapping("/edit/submit")
-	public String editarpedidosubmit(@ModelAttribute("pedido") Pedido pedido, BindingResult bindingResult) {
+	public String editarpedidosubmit(@RequestParam long id,@ModelAttribute("pedido") Pedido pedidoModificado, BindingResult bindingResult) {
 		if (sesion.getAttribute("usuario") == null) {
 			return "redirect:/login";
 		} else {
-			servicioPedido.edit(pedido);
+			
+			Pedido pedidoActual = servicioPedido.findById(id);
+			
+			servicioPedido.edit(pedidoModificado, pedidoActual);
+			
+			
+			List<PedidoProductoDTO> productos = servicioProducto.findProductFromOrder(id);
+
+			double total = servicioPedido.calcularTotal(productos);
+
+			servicioPedido.setTotal(pedidoActual, total);
+
+			
 			return "redirect:/listapedidos";
 		}
 	}

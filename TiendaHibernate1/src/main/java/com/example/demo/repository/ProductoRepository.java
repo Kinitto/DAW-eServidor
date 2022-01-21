@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.model.PedidoProducto;
 import com.example.demo.model.Producto;
 import com.example.demo.model.dto.interfaces.PedidoProductoDTOI;
 
@@ -24,5 +25,13 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 			+ "	pp.id_producto = tp.id_producto "
 			+ "	AND pp.id_pedido = ?1" , nativeQuery = true)
 	List<PedidoProductoDTOI> findProductFromOrder(Long id);
+
+	
+	@Query(value = ""
+			+ "SELECT "
+			+ "* "
+			+ "FROM "
+			+ "t_producto " , nativeQuery = true)
+	List<Producto> findProducts(long id);
 
 }

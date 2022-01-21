@@ -43,6 +43,8 @@ public class Pedido implements Serializable {
 
 	private LocalDate fechaCompra;
 	
+	private String tipoEnvio;
+
 	private boolean borrado;
 
 
@@ -138,6 +140,14 @@ public class Pedido implements Serializable {
 
 	public void setBorrado(boolean borrado) {
 		this.borrado = borrado;
+	}
+
+	public String getTipoEnvio() {
+		return tipoEnvio;
+	}
+
+	public void setTipoEnvio(String tipoEnvio) {
+		this.tipoEnvio = tipoEnvio;
 	}
 	
 	
