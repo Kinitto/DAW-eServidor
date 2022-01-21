@@ -37,6 +37,7 @@ public class ProductoServiceImpl implements ProductoServiceI {
 		return productoRepository.findById(id).orElse(null);
 	}
 	
+	//Encuentra los productos de un pedido especifico y lo mapea a una lista de pedidoProductoDTO
 	@Override
 	public List<PedidoProductoDTO> findProductFromOrder(long id) {
 		return productoMapper.pedProdDTOIListToPedProdTOList(
@@ -50,7 +51,7 @@ public class ProductoServiceImpl implements ProductoServiceI {
 				new Producto(null,"Pantalon Vaquero",25),
 				new Producto(null, "Bomber Deportiva",65)));
 	}
-
+	//encuentra un producto por su id
 	@Override
 	public List<Producto> findProducts(long id) {
 		// TODO Auto-generated method stub

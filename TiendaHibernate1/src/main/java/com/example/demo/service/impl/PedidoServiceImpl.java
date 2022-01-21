@@ -41,10 +41,11 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		return pedidoRepository.findById(id).orElse(null);
 	}
 
+	//crea un nuevo pedido.
 	@Override
 	public Pedido crearPedido(Usuario usuario, List<Integer> cantidades) {
-		// si la cantidad que introduces es mayor de 0 se añade el producto.
-			Pedido pedido = new Pedido();
+
+		Pedido pedido = new Pedido();
 	
 			pedido.setUsuario(usuario);
 			pedido.setFechaCompra(LocalDate.now());
@@ -55,6 +56,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 			
 			pedidoRepository.save(pedido);
 			
+			//creamos la tabla pedidoProducto
 			for(int i = 0;i<cantidades.size();i++){
 				
 				if(cantidades.get(i)>0) {
@@ -65,13 +67,14 @@ public class PedidoServiceImpl implements PedidoServiceI {
 			}
 			return pedido;
 	}
-	
+	//busca pedidos de un usuario
 	@Override
 	public List<Pedido> findOrdersFromUser(Long id) {
 
 		return pedidoRepository.findOrdersFromUser(id);
 	}
 
+	//calcula el total del precio
 	@Override
 	public double calcularTotal(List<PedidoProductoDTO> productos) {
 		
@@ -84,7 +87,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		return total;
 	}
 	
-
+	//setea el total del precio del pedido
 	@Override
 	public void setTotal(Pedido pedidoActual, double total) {
 
@@ -94,7 +97,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 	}
 	
 	
-
+	//borrar el pedido
 	@Override
 	public void delete(Pedido pedidoActual) {
 		
@@ -102,6 +105,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		pedidoRepository.save(pedidoActual);
 	}
 
+	//editar el pedido seteando los datos del pedido que recibimos.
 	@Override
 	public void edit(Pedido pedidoModificado, Pedido pedidoActual) {
 
@@ -116,6 +120,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 
 	}
 
+	//añadir tipo de envio
 	@Override
 	public void addEnvio(Pedido pedidoActual, String envio) {
 

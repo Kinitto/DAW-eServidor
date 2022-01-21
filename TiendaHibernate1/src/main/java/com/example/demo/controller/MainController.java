@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Pedido;
-import com.example.demo.model.PedidoProducto;
-import com.example.demo.model.Producto;
 import com.example.demo.model.Usuario;
 import com.example.demo.model.dto.PedidoProductoDTO;
-import com.example.demo.service.PedidoProductoServiceI;
 import com.example.demo.service.PedidoServiceI;
 import com.example.demo.service.ProductoServiceI;
 import com.example.demo.service.UsuarioServiceI;
@@ -37,9 +33,6 @@ public class MainController {
 
 	@Autowired
 	private PedidoServiceI servicioPedido;
-
-	@Autowired
-	private PedidoProductoServiceI servicioPedidoProducto;
 
 	@Autowired
 	private HttpSession sesion;
@@ -78,8 +71,8 @@ public class MainController {
 	 * usuario es nulo te devuelve de nuevo a login
 	 * 
 	 * @param usuarioDTO
-	 * @param bindingResult
 	 * @param model
+	 * @param redirectAtributos
 	 * @return
 	 */
 
@@ -132,12 +125,9 @@ public class MainController {
 	}
 
 	/**
-	 * El submit de nuestro pedido, recogemos los datos de cantidad que ha
-	 * seleccionado el usuario y creamos el objeto pedido al completo.
-	 * 
-	 * @param camisetacantidad
-	 * @param pantaloncantidad
-	 * @param abrigocantidad
+	 * Recogemos las cantidades que introduce el usuario y 
+	 * con esta lista de cantidades creamos el pedido
+	 * @param cantidades
 	 * @param model
 	 * @return
 	 */
@@ -156,8 +146,10 @@ public class MainController {
 	}
 
 	/**
-	 * obtenemos el resumen del pedido con su precio y seleccionamos el tipo de
-	 * envio
+	 * LLamamos a servicioProducto para que nos devuelva un objeto producto 
+	 * con los datos de cantidad, los metemos en una interfaz lo mapeamos y 
+	 * se lo enviamos a la vista
+	 * seteamos el total del pedido.
 	 * 
 	 * @param model1
 	 * @return
@@ -187,8 +179,9 @@ public class MainController {
 	}
 
 	/**
-	 * comprobamos que existe usuario y enviamos a lista de pedidos.
-	 * 
+	 * recogemos el tipo de envio que introduce el usuario 
+	 * y se lo añadimos al pedido.
+	 * @param envio
 	 * @param model
 	 * @return
 	 */
@@ -258,14 +251,15 @@ public class MainController {
 	}
 
 	/**
-	 * recogemos el pedido que hemos editado y lo enviamos al servicio a la funcion
-	 * de edit.
-	 * @param pedido
-	 * @param bindingResult
+	 * recogemos el pedido que hemos editado y llamamos al servicio
+	 * para que actualize los datos del mismo, tambien llamamos de nuevo
+	 * a la funcion calcular total para obtener el total del nuevo pedido editado
+	 * @param id
+	 * @param pedidoModificado
 	 * @return
 	 */
 	@PostMapping("/edit/submit")
-	public String editarpedidosubmit(@RequestParam long id,@ModelAttribute("pedido") Pedido pedidoModificado, BindingResult bindingResult) {
+	public String editarpedidosubmit(@RequestParam long id,@ModelAttribute("pedido") Pedido pedidoModificado) {
 		if (sesion.getAttribute("usuario") == null) {
 			return "redirect:/login";
 		} else {

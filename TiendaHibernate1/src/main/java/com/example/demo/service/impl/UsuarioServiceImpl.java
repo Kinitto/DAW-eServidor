@@ -24,6 +24,9 @@ public class UsuarioServiceImpl implements UsuarioServiceI {
 		return usuarioRepository.findById(id).orElse(null);
 	}
 	
+	/**
+	 * busca usuario por nombre y contraseña en la bdd
+	 */
 	@Override
 	public Usuario findUser(Usuario usuario) {
 		return usuarioRepository.findByNombreAndPassword(usuario.getNombre(), usuario.getPassword());
