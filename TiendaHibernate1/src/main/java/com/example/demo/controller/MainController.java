@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,23 +16,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.Producto;
 import com.example.demo.model.Usuario;
-import com.example.demo.model.pedidoProducto;
+import com.example.demo.model.dto.PedidoProductoDTO;
+import com.example.demo.service.PedidoProductoServiceI;
 import com.example.demo.service.PedidoServiceI;
 import com.example.demo.service.ProductoServiceI;
 import com.example.demo.service.UsuarioServiceI;
-import com.example.demo.service.pedidoProductoServiceI;
 
 @Controller
 public class MainController {
 
 	@Autowired
 	private UsuarioServiceI servicioUsuario;
+
 	@Autowired
 	private ProductoServiceI servicioProducto;
+
 	@Autowired
 	private PedidoServiceI servicioPedido;
+
 	@Autowired
-	private pedidoProductoServiceI servicioPedidoProducto;
+	private PedidoProductoServiceI servicioPedidoProducto;
+
 	@Autowired
 	private HttpSession sesion;
 
@@ -134,30 +138,14 @@ public class MainController {
 	 * @return
 	 */
 	@PostMapping("/nuevopedido/submit")
-	public String nuevopedidoSubmit(@RequestParam("camisetacantidad") int camisetacantidad,
-			@RequestParam("pantaloncantidad") int pantaloncantidad, @RequestParam("abrigocantidad") int abrigocantidad,
-			Model model) {
+	public String nuevopedidoSubmit(@RequestParam("cantidades") List<Integer> cantidades, Model model) {
 
 		if (sesion.getAttribute("usuario") == null) {
 			return "redirect:/login";
 		}
 		Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-		// si la cantidad que introduces es mayor de 0 se añade el producto.
-		if (camisetacantidad > 0 || pantaloncantidad > 0 || abrigocantidad > 0) {
-
-			Pedido pedido = new Pedido(usuario.getEmail(), usuario.getTelefono(), usuario.getDireccion(),
-					formatter.format(date), usuario);
-			servicioPedido.save(pedido);
-
-			if (camisetacantidad > 0) {
-				Producto producto = servicioProducto.findById(1);
-				pedidoProducto pedidoProducto = new pedidoProducto(pedido, producto, camisetacantidad);
-				servicioPedidoProducto.save(pedidoProducto);
-			}
-		}
+		Pedido pedido = servicioPedido.crearPedido(usuario, cantidades);
+		sesion.setAttribute("idPedido", pedido.getId());
 
 		return "redirect:/resumen";
 	}
@@ -174,17 +162,22 @@ public class MainController {
 		if (sesion.getAttribute("usuario") == null) {
 			return "redirect:/login";
 		}
-		// Crear y enviar las variables para saber que metodo de envio se selecciona.
-		//String domicilio = "";
-		////String tienda = "";
+		Long id = (Long) sesion.getAttribute("idPedido");
 
-		// model.addAttribute("domicilio", domicilio);
-		// model.addAttribute("correo", correo);
-		// model.addAttribute("tienda", tienda);
-		// int pedidosize = servicioPedido.cantidad();
-		// model.addAttribute("hayproducto", pedidosize);
-		// model.addAttribute("listaProducto",
-		// servicioProducto.findProducto(servicioPedido.cantidad()));
+		List<PedidoProductoDTO> productos = servicioProducto.findProductFromOrder(id);
+
+		int productoSize = productos.size();
+
+		Pedido pedidoActual = servicioPedido.findById(id);
+
+		double total = servicioPedido.calcularTotal(productos);
+
+		servicioPedido.setTotal(pedidoActual, total);
+		
+		model.addAttribute("total", total);
+		model.addAttribute("hayproducto", productoSize);
+		model.addAttribute("productos", productos);
+		
 		return "resumen";
 	}
 
@@ -195,4 +188,72 @@ public class MainController {
 	 * @return
 	 */
 
+	@PostMapping("/resumen/submit")
+	public String resumenSubmit(@RequestParam String envio, Model model) {
+
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		}
+		sesion.setAttribute("envio",envio);
+
+		return "redirect:/listapedidos";
+	}
+
+	/**
+	 * comprobamos que hay usuario y mostramos en una tabla todos los pedidos que
+	 * hemos realizado
+	 * 
+	 * @param model
+	 * @return
+	 */
+	
+	@GetMapping("/listapedidos")
+	public String listapedido(Model model) {
+		
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		}
+		Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+		
+		String envio = (String) sesion.getAttribute("envio");
+
+		List<Pedido> listaPedidos = servicioPedido.findProductsFromUser(usuario.getId());
+		int pedidosize = listaPedidos.size();
+		
+		System.out.println(envio);
+		model.addAttribute("hayproducto", pedidosize);
+		model.addAttribute("listaPedidos", listaPedidos);
+		model.addAttribute("envio",envio);
+		
+		return "listapedidos";
+	}
+	
+	/**
+	 * recogemos el id y buscamos el pedido por id y se lo enviamos a la vista
+	 * para poder editar el pedido en especifico que queremos
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	
+	
+	
+	
+	/**
+	 * recogemos la id del pedido que queremos eliminar y se la mandamos al 
+	 * servicio a la funcion delete.
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/delete/{id}")
+	public String deletepedido(@PathVariable long id, Model model) {
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		} else {
+			Pedido pedido = servicioPedido.findById(id);
+			servicioPedido.delete(pedido);
+			return "redirect:/listapedidos";
+		}
+	}
 }

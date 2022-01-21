@@ -9,63 +9,65 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "t_usuario")
 public class Usuario implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private long id;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario")
+	private Long id;
+
+	@Column(nullable = false)
 	private String nombre;
-	
+
+	@Column(nullable = false)
 	private String password;
-	
+
 	private String email;
-	
+
 	private String telefono;
-	
+
 	private String direccion;
 
 	public Usuario() {
 	}
-
-	public Usuario(long id, String nombre, String password, String email, String telefono, String direccion) {
-
+	
+	public Usuario(Long id, String nombre, String password, String email, String telefono, String direccion) {
+		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.password = password;
 		this.email = email;
 		this.telefono = telefono;
 		this.direccion = direccion;
-
 	}
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Column(nullable = false)
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	@Column(nullable = false)
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -73,6 +75,7 @@ public class Usuario implements Serializable {
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -80,6 +83,7 @@ public class Usuario implements Serializable {
 	public String getTelefono() {
 		return telefono;
 	}
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
@@ -87,9 +91,13 @@ public class Usuario implements Serializable {
 	public String getDireccion() {
 		return direccion;
 	}
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }
-
-

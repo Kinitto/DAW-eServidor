@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,32 +23,39 @@ public class Producto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idProducto;
-
-	private String nombre;
-
-	private int precio;
-
-	public Producto() {
-
-	}
-
-	public Producto(long idProducto, String nombre, int precio) {
-		super();
-		this.idProducto = idProducto;
-		this.nombre = nombre;
-		this.precio = precio;
-	}
-
-	public Long getIdProducto() {
-		return idProducto;
-	}
-
-	public void setIdProducto(Long idProducto) {
-		this.idProducto = idProducto;
-	}
+	@Column(name = "id_producto")
+	private Long id;
 
 	@Column(nullable = false)
+	private String nombre;
+
+	@Column(nullable = false)
+	private Integer precio;
+
+	private CategoriaProducto categoria;
+
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+	private List<PedidoProducto> pedidoProducto;
+
+	public Producto() {
+	}
+
+	public Producto(Long id, String nombre, Integer precio, CategoriaProducto categoria) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.precio = precio;
+		this.categoria = categoria;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -58,13 +64,32 @@ public class Producto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(nullable = false)
-	public int getPrecio() {
+	public Integer getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(int precio) {
+	public void setPrecio(Integer precio) {
 		this.precio = precio;
+	}
+
+	public CategoriaProducto getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(CategoriaProducto categoria) {
+		this.categoria = categoria;
+	}
+
+	public List<PedidoProducto> getPedidoProducto() {
+		return pedidoProducto;
+	}
+
+	public void setPedidoProducto(List<PedidoProducto> pedidoProducto) {
+		this.pedidoProducto = pedidoProducto;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

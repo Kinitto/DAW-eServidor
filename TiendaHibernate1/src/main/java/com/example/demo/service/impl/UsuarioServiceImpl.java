@@ -37,9 +37,9 @@ public class UsuarioServiceImpl implements UsuarioServiceI {
 	@PostConstruct
 	public void init() {
 		usuarioRepository.saveAll(Arrays.asList(
-				new Usuario(1, "Admin", "1234", "admin@gmail.com", "666666666", "secret"),
-				new Usuario(2, "Maria", "1234", "maria.sanchez@dominio.es", "656111222", "Calle Pajarito N28"),
-				new Usuario(3, "Juan", "1234", "juanito@dominio.es", "656434767", "Calle Rey N14")));
+				new Usuario(null, "Admin", "1234", "admin@gmail.com", "666666666", "secret"),
+				new Usuario(null, "Maria", "1234", "maria.sanchez@dominio.es", "656111222", "Calle Pajarito N28"),
+				new Usuario(null, "Juan", "1234", "juanito@dominio.es", "656434767", "Calle Rey N14")));
 	}
 
 }
