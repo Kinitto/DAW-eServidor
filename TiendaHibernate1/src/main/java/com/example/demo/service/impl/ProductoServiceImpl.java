@@ -1,8 +1,5 @@
 package com.example.demo.service.impl;
 
-import static com.example.demo.model.CategoriaProducto.ABRIGO;
-import static com.example.demo.model.CategoriaProducto.CAMISETA;
-import static com.example.demo.model.CategoriaProducto.PANTALON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,9 +45,9 @@ public class ProductoServiceImpl implements ProductoServiceI {
 	@PostConstruct
 	public void init() {
 		productoRepository.saveAll(Arrays.asList(
-				new Producto(null, "Camiseta de Gatos",15, CAMISETA),
-				new Producto(null,"Pantalon Vaquero",25, PANTALON),
-				new Producto(null, "Bomber Deportiva",65, ABRIGO)));
+				new Producto(null, "Camiseta de Gatos",15),
+				new Producto(null,"Pantalon Vaquero",25),
+				new Producto(null, "Bomber Deportiva",65)));
 	}
 
 }

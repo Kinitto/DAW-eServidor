@@ -99,6 +99,12 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		pedidoRepository.save(pedidoActual);
 	}
 
+	@Override
+	public void edit(Pedido pedido) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 	

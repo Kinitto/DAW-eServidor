@@ -3,18 +3,20 @@ package com.example.demo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Pedido;
-import com.example.demo.model.Producto;
 import com.example.demo.model.Usuario;
 import com.example.demo.model.dto.PedidoProductoDTO;
 import com.example.demo.service.PedidoProductoServiceI;
@@ -144,6 +146,7 @@ public class MainController {
 			return "redirect:/login";
 		}
 		Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+		
 		Pedido pedido = servicioPedido.crearPedido(usuario, cantidades);
 		sesion.setAttribute("idPedido", pedido.getId());
 
@@ -236,7 +239,36 @@ public class MainController {
 	 * @return
 	 */
 	
+	@GetMapping("/edit/{id}")
+	public String editarpedido(@PathVariable long id, Model model) {
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		}
+		Pedido pedido = servicioPedido.findById(id);
+
+		model.addAttribute("pedido", pedido);
+
 	
+		return "editarpedido";
+	}
+
+	/**
+	 * recogemos el pedido que hemos editado y lo enviamos al servicio a la funcion
+	 * de edit.
+	 * @param pedido
+	 * @param bindingResult
+	 * @return
+	 */
+	@PostMapping("/edit/submit")
+	public String editarpedidosubmit(@ModelAttribute("pedido") Pedido pedido, BindingResult bindingResult) {
+		if (sesion.getAttribute("usuario") == null) {
+			return "redirect:/login";
+		} else {
+			servicioPedido.edit(pedido);
+			return "redirect:/listapedidos";
+		}
+	}
+
 	
 	
 	/**

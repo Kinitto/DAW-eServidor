@@ -32,20 +32,17 @@ public class Producto implements Serializable {
 	@Column(nullable = false)
 	private Integer precio;
 
-	private CategoriaProducto categoria;
-
 	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
 	private List<PedidoProducto> pedidoProducto;
 
 	public Producto() {
 	}
 
-	public Producto(Long id, String nombre, Integer precio, CategoriaProducto categoria) {
+	public Producto(Long id, String nombre, Integer precio) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.categoria = categoria;
 	}
 
 	public Long getId() {
@@ -70,14 +67,6 @@ public class Producto implements Serializable {
 
 	public void setPrecio(Integer precio) {
 		this.precio = precio;
-	}
-
-	public CategoriaProducto getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(CategoriaProducto categoria) {
-		this.categoria = categoria;
 	}
 
 	public List<PedidoProducto> getPedidoProducto() {

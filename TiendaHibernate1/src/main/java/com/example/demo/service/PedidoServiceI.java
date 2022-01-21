@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.example.demo.model.Pedido;
 import com.example.demo.model.Usuario;
 import com.example.demo.model.dto.PedidoProductoDTO;
@@ -21,6 +23,8 @@ public interface PedidoServiceI {
 	public List<Pedido> findProductsFromUser(Long id);
 	
 	public void delete(Pedido pedidoActual);
+
+	public void edit(Pedido pedido);
 
 
 }

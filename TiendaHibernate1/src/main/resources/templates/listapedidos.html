@@ -10,7 +10,7 @@
 	</a>
 	</br>
 	</br>
-	<h1 id=error th:if="${hayproducto == 0}">Aun no ha creado ningun
+	<h1 id=error th:if="${hayproducto == 0}">Aún no ha creado ningun
 		pedido.</h1>
 	<p id=welcome th:if="${hayproducto > 0}">Lista de pedido</p>
 	<br />
@@ -19,15 +19,15 @@
 			<th>id Pedido</th>
 			<th>cod Pedido</th>
 			<th>Total</th>
-			<th>Direccion</th>
-			<th>Telefono</th>
+			<th>Dirección</th>
+			<th>Teléfono</th>
 			<th>Correo</th>
 			<th>Fecha y Hora</th>
 			<th>Operaciones</th>
 
 		</tr>
 		<div th:each="pedido : ${listaPedidos}">
-		<div th:if="${pedido.borrado == false}">
+		<div th:if="${pedido.borrado == false && pedido.totalPrecio > 3}">
 			<tr>
 				<td th:text="${pedido.id}"></td>
 				<td th:text="${pedido.codPedido}"></td>
