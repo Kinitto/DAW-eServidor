@@ -43,94 +43,58 @@ public class PedidoServiceImpl implements PedidoServiceI {
 
 	//crea un nuevo pedido.
 	@Override
-	public Pedido crearPedido(Usuario usuario, List<Integer> cantidades) {
+	public Pedido crearPedido(Pedido pedidoDTO) {
 
-		Pedido pedido = new Pedido();
 	
-			pedido.setUsuario(usuario);
-			pedido.setFechaCompra(LocalDate.now());
-			pedido.setCodPedido(UUID.randomUUID().toString());
-			pedido.setDireccion(usuario.getDireccion());
-			pedido.setEmail(usuario.getEmail());
-			pedido.setTelefono(usuario.getTelefono());
+			pedidoRepository.save(pedidoDTO);
 			
-			pedidoRepository.save(pedido);
-			
-			//creamos la tabla pedidoProducto
-			for(int i = 0;i<cantidades.size();i++){
-				
-				if(cantidades.get(i)>0) {
-					Producto producto = productoService.findById(i+1);
-					PedidoProducto pedidoProducto = new PedidoProducto(null, pedido, producto, cantidades.get(i));
-					pedidoProductoService.save(pedidoProducto);
-				}
-			}
-			return pedido;
+			return pedidoDTO;
 	}
-	//busca pedidos de un usuario
 	@Override
-	public List<Pedido> findOrdersFromUser(Long id) {
+	public List<Pedido> findAll() {
+		// TODO Auto-generated method stub
+		return 	pedidoRepository.findAll();
 
-		return pedidoRepository.findOrdersFromUser(id);
 	}
 
-	//calcula el total del precio
 	@Override
 	public double calcularTotal(List<PedidoProductoDTO> productos) {
-		
-		double total = 0;
-		for(int i = 0;i<productos.size();i++){
-			
-			total = productos.get(i).getCantidad() * productos.get(i).getPrecio() + total;
-		}
-		
-		return total;
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	//setea el total del precio del pedido
+
 	@Override
 	public void setTotal(Pedido pedidoActual, double total) {
-
-		pedidoActual.setTotalPrecio(total);
-		pedidoRepository.save(pedidoActual);
-
+		// TODO Auto-generated method stub
+		
 	}
-	
-	
-	//borrar el pedido
+
+	@Override
+	public List<Pedido> findOrdersFromUser(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public void delete(Pedido pedidoActual) {
+		// TODO Auto-generated method stub
 		
-		pedidoActual.setBorrado(true);
-		pedidoRepository.save(pedidoActual);
 	}
 
-	//editar el pedido seteando los datos del pedido que recibimos.
 	@Override
 	public void edit(Pedido pedidoModificado, Pedido pedidoActual) {
-
-		Pedido pedido = pedidoActual;
+		// TODO Auto-generated method stub
 		
-		pedido.setDireccion(pedidoModificado.getDireccion());
-		pedido.setTelefono(pedidoModificado.getTelefono());
-		pedido.setEmail(pedidoModificado.getEmail());
-		pedido.setProductos(pedidoModificado.getProductos());
-
-		pedidoRepository.save(pedido);
-
 	}
 
-	//añadir tipo de envio
 	@Override
 	public void addEnvio(Pedido pedidoActual, String envio) {
-
-		Pedido pedido = pedidoActual;
+		// TODO Auto-generated method stub
 		
-		pedido.setTipoEnvio(envio);
-		pedidoRepository.save(pedido);
-
 	}
 
+	
+	
 	
 
 	

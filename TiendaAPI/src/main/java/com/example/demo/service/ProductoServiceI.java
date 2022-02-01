@@ -15,4 +15,6 @@ public interface ProductoServiceI {
 	public List<PedidoProductoDTO> findProductFromOrder(long id);
 
 	public List<Producto> findProducts(long id);
+
+	public List<Producto> findAll();
 }

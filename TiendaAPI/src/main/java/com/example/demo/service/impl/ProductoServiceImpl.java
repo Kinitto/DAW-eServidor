@@ -58,4 +58,10 @@ public class ProductoServiceImpl implements ProductoServiceI {
 		return productoRepository.findProducts(id);
 	}
 
+	@Override
+	public List<Producto> findAll() {
+		// TODO Auto-generated method stub
+		return productoRepository.findAll();
+	}
+
 }

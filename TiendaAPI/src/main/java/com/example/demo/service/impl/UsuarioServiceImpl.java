@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Producto;
 import com.example.demo.model.Usuario;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.UsuarioServiceI;
@@ -28,8 +30,12 @@ public class UsuarioServiceImpl implements UsuarioServiceI {
 	 * busca usuario por nombre y contraseña en la bdd
 	 */
 	@Override
-	public Usuario findUser(Usuario usuario) {
-		return usuarioRepository.findByNombreAndPassword(usuario.getNombre(), usuario.getPassword());
+	public Usuario findUser(String email) {
+		return usuarioRepository.findByEmail(email);
+	}
+	
+	public List<Usuario> findAll() {
+		return usuarioRepository.findAll();
 	}
 	
 	@Override

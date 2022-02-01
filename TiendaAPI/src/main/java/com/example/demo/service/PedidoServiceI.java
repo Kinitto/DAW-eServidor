@@ -15,7 +15,7 @@ public interface PedidoServiceI {
 
 	public Pedido findById(long id);
 
-	public Pedido crearPedido(Usuario usuario, List<Integer> cantidades);
+	public Pedido crearPedido(Pedido pedido);
 	
 	public double calcularTotal(List<PedidoProductoDTO> productos);
 
@@ -28,6 +28,9 @@ public interface PedidoServiceI {
 	public void edit(Pedido pedidoModificado, Pedido pedidoActual);
 
 	public void addEnvio(Pedido pedidoActual, String envio);
+
+	public List<Pedido> findAll();
+
 
 
 }

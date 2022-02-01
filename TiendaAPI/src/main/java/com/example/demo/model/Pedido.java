@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ public class Pedido implements Serializable {
 	@Column(name = "id_pedido")
 	private Long id;
 
-	private String codPedido;
+	private String codPedido = UUID.randomUUID().toString();
 
 	private String email;
 	
@@ -41,7 +42,7 @@ public class Pedido implements Serializable {
 	
 	private Double totalPrecio;
 
-	private LocalDate fechaCompra;
+	private LocalDate fechaCompra = LocalDate.now();
 	
 	private String tipoEnvio;
 
@@ -57,6 +58,30 @@ public class Pedido implements Serializable {
 
 	public Pedido() {
 	}
+	
+
+	
+
+
+	public Pedido(Long id, String codPedido, String email, String telefono, String direccion, Double totalPrecio,
+			LocalDate fechaCompra, String tipoEnvio, boolean borrado, List<PedidoProducto> productos, Usuario usuario) {
+		super();
+		this.id = id;
+		this.codPedido = codPedido;
+		this.email = email;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.totalPrecio = totalPrecio;
+		this.fechaCompra = fechaCompra;
+		this.tipoEnvio = tipoEnvio;
+		this.borrado = borrado;
+		this.productos = productos;
+		this.usuario = usuario;
+	}
+
+
+
+
 
 	public Long getId() {
 		return id;

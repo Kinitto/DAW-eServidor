@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import com.example.demo.model.Usuario;
 
 public interface UsuarioServiceI {
@@ -8,6 +10,8 @@ public interface UsuarioServiceI {
 
 	public Usuario findById(long id);
 
-	public Usuario findUser(Usuario usuario);
+	public Usuario findUser(String email);
+
+	public List<Usuario> findAll();
 
 }
