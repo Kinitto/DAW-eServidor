@@ -13,6 +13,7 @@ import com.example.demo.model.PedidoProducto;
 import com.example.demo.model.Producto;
 import com.example.demo.model.Usuario;
 import com.example.demo.model.dto.PedidoProductoDTO;
+import com.example.demo.repository.PedidoProductoRepository;
 import com.example.demo.repository.PedidoRepository;
 import com.example.demo.service.PedidoProductoServiceI;
 import com.example.demo.service.PedidoServiceI;
@@ -30,6 +31,9 @@ public class PedidoServiceImpl implements PedidoServiceI {
 	
 	@Autowired
 	private PedidoProductoServiceI pedidoProductoService;
+	
+	@Autowired
+	private PedidoProductoRepository pedidoProductoRepo;
 	
 	@Override
 	public Pedido save(Pedido pedido) {
@@ -76,8 +80,57 @@ public class PedidoServiceImpl implements PedidoServiceI {
 	}
 
 
+	@Override
+	public PedidoProducto crearLinea(PedidoProducto lineaPedidoDTO, Long id) {
 
+		PedidoProducto lineaPedido = lineaPedidoDTO;
 
+		Pedido pedido = this.findById(id);
+		
+		if(pedido==null) {
+			lineaPedido = null;
+		}
+		else {
+			lineaPedido.setProducto(lineaPedidoDTO.getProducto());
+			lineaPedido.setPedido(pedido);
+			lineaPedido.setCantidad(lineaPedidoDTO.getCantidad());
+			this.setTotalPrecio(lineaPedidoDTO);
+			pedidoProductoRepo.save(lineaPedido);
+		}
+		
+		
+		return lineaPedido;
+	}
+
+	@Override
+	public void setTotalPrecio(PedidoProducto lineaPedidoDTO) {
+		Pedido pedido = findById(lineaPedidoDTO.getPedido().getId());
+		Producto producto = productoService.findById(lineaPedidoDTO.getProducto().getId());
+		
+		double total = producto.getPrecio()*lineaPedidoDTO.getCantidad();
+		
+		if(pedido.getTotalPrecio()==null) {
+			pedido.setTotalPrecio(total);
+
+		}
+		else {
+			pedido.setTotalPrecio(pedido.getTotalPrecio()+total);
+		}
+		
+		pedidoRepository.save(pedido);
+
+	}
+
+	
+	@Override
+	public List<PedidoProducto> getListaLineas(Long id) {
+		
+		Pedido pedido = this.findById(id);
+		List<PedidoProducto> listaLineas = pedido.getProductos();
+		return listaLineas;
+	}
+
+	
 	@Override
 	public double calcularTotal(List<PedidoProductoDTO> productos) {
 		// TODO Auto-generated method stub
@@ -110,6 +163,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		
 	}
 
+	
 	
 	
 	

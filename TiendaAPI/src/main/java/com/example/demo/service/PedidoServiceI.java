@@ -33,6 +33,11 @@ public interface PedidoServiceI {
 
 	public Pedido delete(Long id);
 
+	public PedidoProducto crearLinea(PedidoProducto lineaPedidoDTO, Long id);
+
+	public void setTotalPrecio(PedidoProducto lineaPedidoDTO);
+
+	public List<PedidoProducto> getListaLineas(Long id);
 
 
 }

@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_pedido")
 public class Pedido implements Serializable {
@@ -48,8 +50,9 @@ public class Pedido implements Serializable {
 
 	private boolean borrado;
 
-
+	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<PedidoProducto> productos = new ArrayList<>();
 
 	@ManyToOne

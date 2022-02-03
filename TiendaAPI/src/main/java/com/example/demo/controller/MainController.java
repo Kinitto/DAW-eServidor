@@ -16,6 +16,7 @@ import com.example.demo.model.Pedido;
 import com.example.demo.model.PedidoProducto;
 import com.example.demo.model.Producto;
 import com.example.demo.model.Usuario;
+import com.example.demo.service.PedidoProductoServiceI;
 import com.example.demo.service.PedidoServiceI;
 import com.example.demo.service.ProductoServiceI;
 import com.example.demo.service.UsuarioServiceI;
@@ -31,8 +32,9 @@ public class MainController {
 
 	@Autowired
 	private PedidoServiceI servicioPedido;
-	
 
+	@Autowired
+	private PedidoProductoServiceI servicioLineas;
 
 	@GetMapping("/usuarios")
 	public List<Usuario> getUsuarios() {
@@ -77,7 +79,7 @@ public class MainController {
 
 	}
 	@PutMapping("/pedidos/{id}")
-	public ResponseEntity<Pedido> editPedido(@PathVariable Long id, @RequestBody Pedido pedidoDTO) {
+	public ResponseEntity<Pedido> editarPedido(@PathVariable Long id, @RequestBody Pedido pedidoDTO) {
 		
 		//excepcion si el id es null
 		Pedido pedido = servicioPedido.editPedido(id, pedidoDTO);
@@ -87,14 +89,39 @@ public class MainController {
 	}
 	
 	@DeleteMapping("/pedidos/{id}")
-	public Pedido deletePedido(@PathVariable Long id) {
+	public Pedido borrarPedido(@PathVariable Long id) {
 		
 		//excepcion si el id es null
-		Pedido pedido = this.servicioPedido.delete(id);
+		Pedido pedido = servicioPedido.delete(id);
 		
 		return pedido;
 
 	}
 
+	@PostMapping("/pedidos/{id}/lineapedido")
+	public PedidoProducto crearLinea(@RequestBody PedidoProducto lineaPedidoDTO, @PathVariable Long id) {
+		
+		return servicioPedido.crearLinea(lineaPedidoDTO, id);
+	}
 	
+	@GetMapping("/pedidos/{id}/lineapedido")
+	public List<PedidoProducto> getLineas(@PathVariable Long id) {
+		
+		List<PedidoProducto> listaLineas = servicioPedido.getListaLineas(id);
+		return listaLineas;
+	}
+	
+	@DeleteMapping("/pedidos/{id}/lineapedido/{idLinea}")
+	public PedidoProducto borrarLineas(@PathVariable Long id,@PathVariable Long idLinea) {
+		
+		Pedido pedido = servicioPedido.findById(id);
+		servicioLineas.borrarLineas(pedido,idLinea);
+		return null;
+	}
+	
+	@PutMapping("/pedidos/{id}/lineapedido")
+	public PedidoProducto editarLinea(@RequestBody PedidoProducto lineaPedidoDTO, @PathVariable Long id) {
+		
+		return servicioPedido.crearLinea(lineaPedidoDTO, id);
+	}
 }

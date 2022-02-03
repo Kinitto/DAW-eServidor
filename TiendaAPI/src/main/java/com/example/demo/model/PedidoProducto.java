@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "t_pedidoProducto")
 public class PedidoProducto implements Serializable {
@@ -24,16 +28,18 @@ public class PedidoProducto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido_producto")
-	private Long id;
+	private Long idLinea;
 
 	@ManyToOne
 	@JoinColumn(name = "id_pedido", foreignKey = @ForeignKey(name = "FK_PEDIDO_PRODUCTO__ID_PEDIDO"))
+	
 	private Pedido pedido;
 
 	@ManyToOne
 	@JoinColumn(name = "id_producto", foreignKey = @ForeignKey(name = "FK_PEDIDO_PRODUCTO__ID_PRODUCTO"))
+	
 	private Producto producto;
-
+	
 	private Integer cantidad;
 
 	public PedidoProducto() {
@@ -41,18 +47,18 @@ public class PedidoProducto implements Serializable {
 
 	public PedidoProducto(Long id, Pedido pedido, Producto producto, Integer cantidad) {
 		super();
-		this.id = id;
+		this.idLinea = idLinea;
 		this.pedido = pedido;
 		this.producto = producto;
 		this.cantidad = cantidad;
 	}
 
 	public Long getId() {
-		return id;
+		return idLinea;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long idLinea) {
+		this.idLinea = idLinea;
 	}
 
 	public Pedido getPedido() {
