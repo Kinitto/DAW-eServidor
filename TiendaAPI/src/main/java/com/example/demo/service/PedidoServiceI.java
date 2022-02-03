@@ -22,14 +22,16 @@ public interface PedidoServiceI {
 	public void setTotal(Pedido pedidoActual, double total);
 
 	public List<Pedido> findOrdersFromUser(Long id);
-	
-	public void delete(Pedido pedidoActual);
 
 	public void edit(Pedido pedidoModificado, Pedido pedidoActual);
 
 	public void addEnvio(Pedido pedidoActual, String envio);
 
 	public List<Pedido> findAll();
+
+	public Pedido editPedido(Long id, Pedido pedidoDTO);
+
+	public Pedido delete(Long id);
 
 
 

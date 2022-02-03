@@ -56,6 +56,27 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		return 	pedidoRepository.findAll();
 
 	}
+	@Override
+	public Pedido editPedido(Long id, Pedido pedidoDTO) {
+
+		
+			pedidoDTO.setId(id);
+			pedidoRepository.save(pedidoDTO);
+		
+		return pedidoDTO;
+	}
+	
+	@Override
+	public Pedido delete(Long id) {
+		// TODO Auto-generated method stub
+		Pedido pedido = this.findById(id);
+		pedidoRepository.deleteById(id);
+		
+		return pedido;
+	}
+
+
+
 
 	@Override
 	public double calcularTotal(List<PedidoProductoDTO> productos) {
@@ -75,11 +96,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		return null;
 	}
 
-	@Override
-	public void delete(Pedido pedidoActual) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void edit(Pedido pedidoModificado, Pedido pedidoActual) {
@@ -93,6 +110,7 @@ public class PedidoServiceImpl implements PedidoServiceI {
 		
 	}
 
+	
 	
 	
 	
