@@ -10,8 +10,6 @@ public interface UsuarioServiceI {
 
 	public Usuario findById(long id);
 
-	public Usuario findUser(String email);
-
 	public List<Usuario> findAll();
 
 }

@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Producto;
 import com.example.demo.model.Usuario;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.service.UsuarioServiceI;
-
+/**
+ * servicio de usuario
+ * @author joaquin
+ *
+ */
 @Primary
 @Service("UsuarioServiceImpl")
 public class UsuarioServiceImpl implements UsuarioServiceI {
@@ -21,28 +24,33 @@ public class UsuarioServiceImpl implements UsuarioServiceI {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	/**
+	 * busca un usuario por id
+	 */
 	@Override
 	public Usuario findById(long id) {
 		return usuarioRepository.findById(id).orElse(null);
 	}
 	
 	/**
-	 * busca usuario por nombre y contraseña en la bdd
+	 * busca todos los usuarios
 	 */
-	@Override
-	public Usuario findUser(String email) {
-		return usuarioRepository.findByEmail(email);
-	}
 	
 	public List<Usuario> findAll() {
 		return usuarioRepository.findAll();
 	}
 	
+	/**
+	 * guarda todos los usuarios
+	 */
 	@Override
 	public Usuario save(Usuario usuario) {
 		return usuarioRepository.save(usuario);
 	}
 
+	/**
+	 * crea usuarios al iniciar la aplicacion
+	 */
 	@PostConstruct
 	public void init() {
 		usuarioRepository.saveAll(Arrays.asList(

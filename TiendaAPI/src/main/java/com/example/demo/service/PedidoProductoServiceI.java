@@ -11,4 +11,6 @@ public interface PedidoProductoServiceI {
 
 	public void borrarLineas(Pedido pedido, Long idLinea);
 
+	public PedidoProducto editarLinea(PedidoProducto lineaPedidoDTO, Long idLinea, Pedido pedido);
+
 }

@@ -16,6 +16,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * clase pedidoProducto / lineaPedido
+ * @author joaquin
+ *
+ */
 @Entity
 @Table(name = "t_pedidoProducto")
 public class PedidoProducto implements Serializable {

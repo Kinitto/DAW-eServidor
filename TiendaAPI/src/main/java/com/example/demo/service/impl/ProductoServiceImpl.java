@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.PedidoProducto;
 import com.example.demo.model.Producto;
-import com.example.demo.model.dto.PedidoProductoDTO;
-import com.example.demo.model.mapper.ProductoMapper;
+
 import com.example.demo.repository.ProductoRepository;
 import com.example.demo.service.ProductoServiceI;
-
+/**
+ * servicio de Producto
+ * @author joaquin
+ *
+ */
 @Primary
 @Service("ProductoServiceImpl")
 public class ProductoServiceImpl implements ProductoServiceI {
@@ -24,26 +27,34 @@ public class ProductoServiceImpl implements ProductoServiceI {
 	@Autowired
 	private ProductoRepository productoRepository;
 	
-	@Autowired
-	private ProductoMapper productoMapper;
-	
+	/**
+	 * guarda un producto
+	 */
 	@Override
 	public Producto save(Producto producto) {
 		return productoRepository.save(producto);
 	}
+	/**
+	 * busca un producto por id
+	 */
 
 	@Override
 	public Producto findById(long id) {
 		return productoRepository.findById(id).orElse(null);
 	}
-	
-	//Encuentra los productos de un pedido especifico y lo mapea a una lista de pedidoProductoDTO
+
+	/**
+	 * busca todos los productos
+	 */
 	@Override
-	public List<PedidoProductoDTO> findProductFromOrder(long id) {
-		return productoMapper.pedProdDTOIListToPedProdTOList(
-				productoRepository.findProductFromOrder(id));
+	public List<Producto> findAll() {
+		// TODO Auto-generated method stub
+		return productoRepository.findAll();
 	}
 
+	/**
+	 * crea productos al iniciar la aplicación
+	 */
 	@PostConstruct
 	public void init() {
 		productoRepository.saveAll(Arrays.asList(
@@ -51,17 +62,6 @@ public class ProductoServiceImpl implements ProductoServiceI {
 				new Producto(null,"Pantalon Vaquero",25),
 				new Producto(null, "Bomber Deportiva",65)));
 	}
-	//encuentra un producto por su id
-	@Override
-	public List<Producto> findProducts(long id) {
-		// TODO Auto-generated method stub
-		return productoRepository.findProducts(id);
-	}
-
-	@Override
-	public List<Producto> findAll() {
-		// TODO Auto-generated method stub
-		return productoRepository.findAll();
-	}
+	
 
 }

@@ -11,7 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+/**
+ * clase producto
+ * @author joaquin
+ *
+ */
 @Entity
 @Table(name = "t_producto")
 public class Producto implements Serializable {
