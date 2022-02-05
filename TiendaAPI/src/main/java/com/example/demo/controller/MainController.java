@@ -253,6 +253,7 @@ public class MainController {
 		}
 		else {
 			Pedido pedido = servicioPedido.findById(id);
+			servicioPedido.restarPrecio(linea);
 			PedidoProducto lineaPedido = servicioLineas.editarLinea(lineaPedidoDTO, idLinea, pedido);
 			servicioPedido.setTotalPrecio(lineaPedido);
 			return lineaPedido;
