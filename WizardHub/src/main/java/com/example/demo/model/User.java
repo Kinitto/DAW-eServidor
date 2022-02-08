@@ -2,16 +2,23 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "t_user")
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String email;
@@ -20,6 +27,24 @@ public class User {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	
+	private String name;
+	
+	private Integer phone;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Favorites> favorites = new ArrayList<>();
+
+	
+	
+	public User(Long id, String email, String password, String name, Integer phone, List<Favorites> favorites) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.favorites = favorites;
+	}
 
 	public User() {
 		super();
@@ -49,11 +74,27 @@ public class User {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + "]";
+	public String getName() {
+		return name;
 	}
-	
-	
-	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Integer phone) {
+		this.phone = phone;
+	}
+
+	public List<Favorites> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<Favorites> favorites) {
+		this.favorites = favorites;
+	}
 }
